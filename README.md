@@ -1,5 +1,5 @@
 # ProyectoFinal
-![Modelo E/R](https://github.com/Fabiobr27/ProyectoFinal/blob/master/BD.png)
+![Modelo E/R](https://github.com/Fabiobr27/TFG/blob/master/BD.png)
 
 El funcionamiento de mi pagina es el siguiente:
 
