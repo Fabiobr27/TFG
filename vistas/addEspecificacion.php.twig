@@ -1,0 +1,71 @@
+{% extends "plantillaBase.php.twig" %}
+
+{% block head %}
+    <!--Fabio Benitez Ramirez-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    
+    <style>
+
+        #otro{
+            display: none;
+        }
+
+    </style>
+
+
+{% endblock %}
+
+
+{% block contenido %} 
+
+    <div class="row">
+        <div class="col-sd-12 mx-auto">
+            <img class="logo" src="./imagenes/logo2.png" alt="ForoCarros" />
+        </div>
+    </div>
+
+    <form method="get" action="index.php" >
+        <input type="hidden" name="ope" value="insertar"/>
+        <input type="hidden" name="con" value="especificaciones"/>
+
+        <div class="row form-group">
+            <div class="col-md-4 mx-auto">
+                <label class="col-form-label" for="email">Codigo </label>
+                <input class="form-control" type="cod" name="cod" value="{{tab.codigoMod}}"/>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-4 mx-auto">
+                <label class="col-form-label" for="email">Caballos </label>
+                <input class="form-control" type="cab" name="cab"/>
+            </div>
+        </div>
+
+
+        <div class="row form-group">
+            <div class="col-md-4 mx-auto">
+                <label class="col-form-label" for="nombre">Combustible</label>
+                <input class="form-control" type="text" name="comb" required />
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-4 mx-auto">
+                <label class="col-form-label" for="apellidos">Año:</label>
+                <input class="form-control" type="text" name="ano" />
+            </div>
+        </div>
+
+     
+
+        <div class="row form-group">
+            <div class="col-md-4 mx-auto">
+                <button class="btn btn-primary w-100" type="submit">Registrar</button>
+            </div>
+        </div>
+    </form>
+
+
+    
+
+
+{% endblock %}

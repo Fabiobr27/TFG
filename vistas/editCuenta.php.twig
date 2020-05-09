@@ -1,0 +1,32 @@
+{% extends "plantillaBase.php.twig" %}
+
+{% block titulo %}
+<h1 class="mt-4">Tableros: Editar</h1>
+{% endblock %}
+
+{% block contenido %}
+
+		<form action="index.php" method="get">
+			<input type="hidden" name="con" value="Usuario" />
+			<input type="hidden" name="ope" value="editar" />
+
+			<label for="id">ID: </label>
+			<input type="text" id="id" name="id" value="{{dat.idUsu}}" readonly />
+			<br/>			
+			<label for="nom">Nombre: </label>
+			<input type="text" id="nom" name="nom" value="{{dat.Nombre}} " />
+			<br/>
+                        <label for="nom">Apellidos </label>
+			<input type="text" id="ape" name="ape" value="{{dat.Apellidos}} " />
+			<br/>
+                        <label for="nom"> Email:</label>
+                       
+			<input type="text" id="ema" name="ema" value="{{dat.Email}} " />
+			<br/>
+			<label for="fec">Fecha de creación: </label>
+			<input type="date" id="fec" name="fec" value="{{dat.Fecha}}" />
+			<br/>
+			<button type="submit">Guardar</button>
+		</form>
+
+{% endblock %}

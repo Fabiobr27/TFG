@@ -1,0 +1,72 @@
+{% extends "plantillaBase.php.twig" %}
+
+{% block titulo %}
+    <!--Fabio Benitez Ramirez-->
+{% endblock %}
+
+{% block contenido %}
+
+
+    <p>Bienvenido/a, {{ dat.nombre }}</p><br/>
+    <a href="?con=Anuncio&ope=add&idUsu={{ idUsu }}">+ Publicar nuevo Anuncio</a><br/>
+
+    {% for item in dat %}
+        <div class="card my-2">
+            <div class="card-header">
+                {{item.Cabecera}}  
+                 <div class="float-right">
+                     <a href="index.php?con=Usuario&ope=mostrarPerfilAjeno&id={{item.idUsu}}">    {{item.nombre}} {{item.apellidos}}</a>
+                 </div>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{item.descripcion}}</p><br/>     
+
+
+                <div class="float-left">
+                    <table id="tbl">
+                        <tr>
+                            <th>Marca</th>
+                            <td>{{item.Marca}}</td>
+                        </tr>
+                        <tr>
+                            <th>Modelo </th>
+                            <td>{{item.modelo}}</td>
+                        </tr>
+                        <tr>
+                            <th>Color</th>
+                            <td>{{item.color}}</td>
+                        </tr>
+                        <tr>
+                            <th>Año</th>
+                            <td>{{item.anio}}</td>
+                        </tr>
+                        <tr>
+                            <th>Kilometros</th>
+                            <td>{{item.kilometros}}</td>
+                        </tr>
+                        <tr>
+                            <th>Combustible</th>
+                            <td>{{item.combustible}}</td>
+                        </tr>
+                    </table>
+                   <a href="index.php?con=Anuncio&ope=ver&idAnuncio={{item.IdAnuncio}}">Ver</a>
+                {% if item.idUsu == idUsu %}
+                    <a href="index.php?ope=delete&con=Anuncio&idAnuncio={{item.IdAnuncio}}">Borrar</a>
+                    <a href="index.php?ope=edit&con=Anuncio&idAnuncio={{item.IdAnuncio}}">Editar</a>
+                {% endif %}
+                </div>
+                <div class="float-right">
+                    
+                    <img src="{{ item.imagen }}" width="500px" height="250px" alt="Usuario"/>  
+                </div>
+                <br>
+                
+
+
+            </div>
+        </div>
+                <br>
+    {% endfor %}
+
+{% endblock %}
+

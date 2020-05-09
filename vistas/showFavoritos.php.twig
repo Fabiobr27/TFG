@@ -1,0 +1,32 @@
+{% extends "plantillaBase.php.twig" %}
+
+{% block titulo %}
+    <!--FabioBenitez Ramirez-->
+    <h1 class="mt-4">Favoritos</h1>
+{% endblock %}
+
+{% block contenido %}
+
+
+
+
+
+    <div id="columnas" class="row mb-3">
+        {% for item in dat %}
+
+            <div id="prueba" class="col  col-lg-3">
+                <div class="card mx-auto" style="width:12rem;">
+                    <img src="{{item.imagen}}" class="card-img-top" />
+                    <div class="card-body text-center">
+                        <h6 style="color: black" class="card-title">{{item.NombreMarca}}</h6>
+                        <h6  style="color: black" class="card-title">{{item.NombreMod}}</h6>
+                        <a class="btn btn-primary"   href="index.php?con=especificaciones&ope=listar&id={{item.codigoMod}}">Ver Especificaciones</a>
+                    </div>	
+                </div>	
+            </div>	
+        {% endfor %}
+
+    </div>
+
+
+{% endblock %}

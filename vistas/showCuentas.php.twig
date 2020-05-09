@@ -1,0 +1,37 @@
+{% extends "plantillaBase.php.twig" %}
+
+{% block head %}
+    <!--Fabio Benitez Ramirez-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% endblock %}
+
+{% block titulo %} <h1>Listado de Cuentas</h1> {% endblock %}
+
+{% block contenido %}
+
+
+
+    {% for item in dat  %}
+        <div style="position: relative; left: 500px;"class="col col-lg-3">
+            <div class="card bg-light mb-3 mx-auto" style="width:23rem;">
+                <img src="{{item.Foto}}" class="card-img-top" />
+                <div class="card-body text-center">
+
+                    <h6 style="color: black" class="card-title">Nombre Usuario: {{item.Nombre}} </h6>
+                    <h6  style="color: black"class="card-title">Apellidos: {{item.Apellidos}}</h6>
+                    <h6 style="color: black" class="card-title">Fecha Nacimiento: {{item.Fecha}}</h6>
+                    <h6 style="color: black" class="card-title">Email: {{item.Email}}</h6>
+                    <h6 style="color: black" class="card-title">Tipo Usuario: {{item.Tipo}}</h6>
+
+                    <a class="btn btn-primary"  href="index.php?con=Usuario&ope=borrar&id={{item.IdUsu}}">Eliminar Cuenta</a><br>
+                    <br>
+    <a class="btn btn-primary"  href="index.php?con=Usuario&ope=hacerAdmin&id={{item.IdUsu}}">Hacer Admin</a><br>
+
+                </div>	<!-- end-card-body -->
+            </div>	<!-- end-card -->
+        </div>	<!-- end-col -->
+
+    {% endfor %}
+
+
+{% endblock %}
