@@ -1,100 +1,130 @@
-
 <?php
 
-//Fabio Benitez Ramirez
-require_once("Database.php");
-require_once("modelos/Usuario.php");
+	require_once("Database.php") ;
+	require_once("models/Usuario.php") ;
 
-class Sesion {
+	class Sesion
+	{
+		private $usuario ; 
+		private $time_expire = 3000 ;				// segundos
+		private static $instancia = null ;
 
-    public $usuario;
-    private $time_expire = 1800;    // segundos
-    private static $instancia = null;
+		/**
+		 */
+		private function __construct() { }
 
-    /**
-     */
-    private function __construct() {
-        
-    }
+		/**
+		 */
+		private function __clone() { }	
 
-    /**
-     */
-    private function __clone() {
-        
-    }
+		/**
+		 */
+		public function getUsuario()
+		{
+			return $this->usuario ;
+		}
 
-    /**
-     */
-    public function getUsuario() {
-        return $this->usuario;
-    }
+		/**
+		 */
+		public function close()
+		{
+			// vaciamos las variables de sesión
+			session_unset();
 
-    /**
-     */
-    public function close() {
+			// destruir la sesión
+			session_destroy() ;
+		}
 
-        session_unset();
+		/**
+		 */
+		public static function getInstance()
+		{
+			session_start() ;
 
-        session_destroy();
-    }
+			// comprobamos 
+			if (isset($_SESSION["_sesion"])):
+				self::$instancia = unserialize($_SESSION["_sesion"] ) ;
+			else:
+				if (self::$instancia===null) 
+					self::$instancia = new Sesion() ;
+			endif ;
 
-    public static function getInstance() {
-        session_start();
+			// devolvemos la instancia
+			return self::$instancia ;
+		}
 
-        if (isset($_SESSION["_sesion"])):
-            self::$instancia = unserialize($_SESSION["_sesion"]);
-        else:
-            if (self::$instancia === null)
-                self::$instancia = new Sesion();
-        endif;
+		/**
+		 */
+		public function login(string $ema, string $pas):bool
+		{
+			// instanciar la clase Database
+			$db = Database::getInstance() ;
 
+			// buscamos el usuario
+			//$sql  = "SELECT * FROM usuario WHERE email=:ema AND pass=MD5(:pas) ; " ;
+			$sql = "SELECT * FROM usuario WHERE email='$ema' AND pass=MD5($pas) ;" ;
+			$db->query($sql);
 
-        return self::$instancia;
-    }
-public function redirect(string $url)
+			if ($user = $db->getObject("Usuario")):
+
+				// rescatar la información del usuario
+				$this->usuario = $user->getIdUsu();
+
+				// si el usuario es correcto, iniciamos la sesión
+				// guardamos el momento (segs.) en que se inicia
+				// la sesión
+				$_SESSION["time"]    = time() ;
+				$_SESSION["_sesion"] = serialize(self::$instancia) ;
+
+				// la sesión se ha iniciado
+				return true ;
+
+			endif ;
+
+			// la sesión no se ha iniciado
+			return false ;
+		}
+
+		/**
+		 * @return bool
+		 */
+		public function isExpired():bool
+		{
+			return (time() - $_SESSION["time"] > $this->time_expire) ;
+		}
+
+		/**
+		 * @return bool
+		 */
+		public function isLogged():bool
+		{
+			return !empty($_SESSION) ;
+		}
+
+		/**
+		 * @return bool
+		 */
+		public function checkActiveSession():bool
+		{
+			if ($this->isLogged())
+				if (!$this->isExpired()) return true ;
+			//
+			return false ;
+		}
+
+		/**
+		 */
+		public function redirect(string $url)
 		{
 			header("Location: $url") ;
 			die() ;
 		}
-    public function login(string $ema, string $pas): bool {
 
-        $db = Database::getInstance();
+		/**
+		 */
+		// public function __sleep()
+		// {
+		// 	return ["usuario", "instancia"] ;
+		// }
 
-
-        $sql = "SELECT * FROM usuario WHERE email='$ema' AND pass=MD5($pas) ;";
-        $db->query($sql);
-
-        if ($user = $db->getObject("Usuario")):
-
-
-            $this->usuario = $user->getIdUsu();
-
-            $_SESSION["time"] = time();
-            $_SESSION["_sesion"] = serialize(self::$instancia);
-
-
-            return true;
-
-        endif;
-
-
-        return false;
-    }
-
-    public function isExpired(): bool {
-        return (time() - $_SESSION["time"] > $this->time_expire);
-    }
-
-    public function isLogged(): bool {
-        return !empty($_SESSION);
-    }
-
-    public function checkActiveSession(): bool {
-        if ($this->isLogged())
-            if (!$this->isExpired())
-                return true;
-
-        return false;
-    }
-
-}
+	}

@@ -1,0 +1,19 @@
+{% extends "plantillaBase.php.twig" %}
+
+{% block contenido %}
+    <p>Escribe tu post </p><br/>
+    <form method="GET" class="form">
+        <input type="hidden" name="con" value="Hilo"/>
+        <input type="hidden" name="ope" value="edit"/>
+        <input type="hidden" name="idHilo" value="{{hilo.idHilo }}"/>
+        <input type="hidden" name="idUsu" value="{{ idUsu }}"/>
+        
+        <label style="color: white" for="titulo">Titulo: </label>
+        <textarea class="form-control" maxlength="300" rows="5" name="titulo" >{{ hilo.titulo }}</textarea><br/>
+        <label style="color: white" for="Descripcion">Descripción: </label>
+        <textarea class="form-control"  rows="5" name="texto">{{ hilo.texto}}</textarea><br/>
+        <button type="submit" class="btn btn-primary mx-2 my-2">Comentar</button>
+        <a href="index.php?con=Hilo&ope=listar"><button class="btn btn-danger">Cancelar</button></a>
+    </form>
+
+{% endblock %}

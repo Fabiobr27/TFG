@@ -1,0 +1,124 @@
+{% extends "plantilla.base.php.twig" %}
+{% block script %}{% endblock %}
+{% block nav %}
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-white">
+		<a class="navbar-brand font-weight-bold text-primary" href="index.php">Padelemotion</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+			<!--<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+				<a class="nav-link" href="main.php">Torneos
+					<span class="sr-only">(current)</span>
+				</a>
+				</li>
+				<li class="nav-item">
+				<a class="nav-link" href="#">Jugadores</a>
+				</li>
+			</ul>-->
+			<ul class="navbar-nav ml-auto nav-flex-icons bg-primary">
+				<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="fas fa-user"></i>
+				</a>
+				<div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+					<a class="dropdown-item" href="?con=jugador&ope=edit">Ver perfil</a>
+					<a class="dropdown-item" href="?con=login&ope=logout">Salir</a>
+				</div>
+				</li>
+			</ul>
+		</div>
+		
+	</nav>
+{% endblock %}
+{% block contenido %}
+    <div class="row">
+        <div class="col-sd-12 mx-auto my-5">
+            <h1 class="h1">Edita tu perfil</h1>
+        </div>
+    </div>
+
+
+    <div class="card bg-light hoverable">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ dat.foto }}" class="img-thumbnail">
+            </div>
+            <!-- formulario de registro -->
+            <div class="col-md-6">
+            
+                <form method="post">
+                    <input type="hidden" name="con" value="jugador"/>
+                    <input type="hidden" name="ope" value="edit"/>
+
+                    <!-- nombre de usuario -->
+                    <div class="row form-group">
+                        <div class="col-md-10 mx-auto">
+                            <label class="col-form-label" for="emailEdit">Correo electrónico:</label>
+                            <input class="form-control" type="email" name="emailEdit" value="{{ dat.email }}" required />
+                        </div>
+                    </div>
+
+                    <!-- nombre -->
+                    <div class="row form-group">
+                        <div class="col-md-10 mx-auto">
+                            <label class="col-form-label" for="nombreEdit">Nombre:</label>
+                            <input class="form-control" type="text" name="nombreEdit" value="{{ dat.nombreJ }}" required />
+                        </div>
+                    </div>
+
+                    <!-- posicion -->
+                    <div class="row form-group">
+                        <div class="col-md-10 mx-auto">
+                            <label class="col-form-label" for="posicionEdit">Posición:</label>
+                            <!--<input class="form-control" type="text" name="posicion" required />-->
+                            <select class="form-control" name="posicionEdit" required>
+                                {# <option selected value="{{ dat.posicion }}">{{ dat.posicion }}</option> #}
+                                <option {% if dat.posicion == "derecha" %}selected{% endif %} value="derecha">Derecha</option>
+                                <option {% if dat.posicion == "reves" %}selected{% endif %} value="reves">Revés</option>
+                                <option {% if dat.posicion == "ambos" %}selected{% endif %} value="ambos">Ambos</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- fecha de nacimiento -->
+                    <div class="row form-group">
+                        <div class="col-md-10 mx-auto">
+                            <label class="col-form-label" for="fnacEdit">Fecha de Nacimiento:</label>
+                            <input class="form-control" type="date" name="fnacEdit" value="{{ dat.fec_nacimientos }}" />
+                        </div>
+                    </div>
+
+                    <!-- registro -->
+                    <div class="row form-group">
+                        <div class="col-md-10 mx-auto">
+                            <button class="btn btn-primary w-100" type="submit">Actualizar perfil</button>
+                        </div>
+                    </div>
+                    {% if error == false %}
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <div class="alert alert-success w-50 mx-auto" role="alert">
+                                Se ha actualizado el usuario correctamente.
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </form>
+
+                <!-- borrar jugador -->
+                <div class="row form-group">
+                    <div class="col-md-10 mx-auto">
+                        <form action="" method="get">
+                            <input type="hidden" value="jugador" name="con">
+                            <input type="hidden" value="borrar" name="ope">
+                            <input type="hidden" value="{{ dat.IdJug }}" name="idJugador">
+                            <button class="btn btn-danger w-100" type="submit">BORRAR CUENTA</button>
+                        </form>
+                    </div>
+                </div>
+            </div> {# fin de la columna de datos #}
+        </div>  {# fin de row #}
+    </div> {# fin del card #}
+{% endblock %}

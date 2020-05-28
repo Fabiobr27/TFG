@@ -1,0 +1,41 @@
+{% extends "plantillaBase.php.twig" %}
+
+{% block titulo %}
+    <!--Fabio Benitez Ramirez-->
+    <h1 class="mt-4">Perfil</h1>
+{% endblock %}
+
+{% block contenido %}
+
+
+
+
+    <div style="position: relative; left: 500px;"class="col col-lg-3">
+        <div class="card bg-light mb-3 mx-auto" style="width:23rem;">
+            <img src="{{dat.foto}}" class="card-img-top" />
+            <div class="card-body text-center">
+<h6 style="color: black" class="card-title">id Usuario: {{dat.idUsu}} </h6>
+                <h6 style="color: black" class="card-title">Nombre Usuario: {{dat.Nombre}} </h6>
+                <h6  style="color: black"class="card-title">Apellidos: {{dat.Apellidos}}</h6>
+                <h6 style="color: black" class="card-title">Fecha Nacimiento: {{dat.Fecha}}</h6>
+                <h6 style="color: black" class="card-title">Email: {{dat.Email}}</h6>
+                <h6 style="color: black" class="card-title">Tipo Usuario: {{dat.Tipo}}</h6>
+                <h6 style="color: black" class="card-title">Numero de Mensajes: {{men.mensajes}}</h6>
+                <h6 style="color: black" class="card-title">Numero Hilos Creados: {{hilo.Hilo}}</h6>
+                <h6 style="color: black" class="card-title">Numero Anuncios Subidos: {{anuncio.Anuncios}}</h6>
+
+                <a class="btn btn-primary"  href="index.php?con=Favoritos&ope=listar">Ver favoritos</a>
+                <a class="btn btn-primary"  href="index.php?con=Usuario&ope=editar&id={{dat.idUsu}}">Editar Cuenta</a>
+                <br><p></p>
+                <a class="btn btn-primary"  href="index.php?con=Anuncio&ope=listarCreados&id={{dat.idUsu}}">Ver Anuncios</a>
+                <a class="btn btn-primary"  href="index.php?con=Hilo&ope=listarCreados&id={{dat.idUsu}}">Ver Hilos</a>
+                <br>
+                {% if tip.Tipo == 'Admin' %}
+                    <br>
+                    <a class="btn btn-primary"  href="index.php?con=Usuario&ope=mostrarCuentas">Ver listado de Cuentas</a>
+                {% endif %}
+            </div>	<!-- end-card-body -->
+        </div>	<!-- end-card -->
+    </div>	<!-- end-col -->
+
+{% endblock %}

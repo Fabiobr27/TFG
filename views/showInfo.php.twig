@@ -1,0 +1,49 @@
+{% extends "plantillaBase.php.twig" %}
+
+{% block contenido %}
+    
+
+    <a href="index.php?con=Hilo&ope=listar">Volver</a><br/>    <h1 style="color:white"> HILO</h1>
+    <div class="card my-2">
+        <div class="card-header">
+            <img src="{{ pos.foto }}" alt="Usuario" class="rounded-circle"/>  <strong>{{ pos.nombre }} {{pos.apellidos }}</strong>, {{ pos.fecha}}
+        </div>
+        <div style="color: black" class="card-body">
+
+            <p class="card-text">{{ pos.titulo }}</p><br/>
+            <p class="card-text">{{ pos.texto }}</p><br/>
+
+            {% if usuario.idUsu == pos.idUsu %}
+                <a href="index.php?ope=delete&con=Hilo&id={{ pos.idHilo }}">Borrar</a>
+                <a href="index.php?con=Hilo&ope=edit&idHilo={{ pos.idHilo }}">Editar</a>
+            {% endif %}
+            <div class="float-right">
+                <a  href="?con=Hilo&ope=increase&idHilo={{ pos.idHilo }}"> <i class="far fa-hand-point-up"></i>{{ pos.positivos }}</a>
+                <a  href="?con=Hilo&ope=decrease&idHilo={{ item.idHilo }}"><i class="far fa-hand-point-down"></i>{{ pos.negativos }}</a>
+            </div>
+
+        </div>
+    </div>
+<h1 style="color:white"> Comentarios</h1>
+    <a href="?con=respuesta&ope=add&idUsu={{ usuario.idUsu }}&idHilo={{ pos.idHilo }}">Publicar comentario</a><br/>
+    {% for comentario in data %}
+        <div class="card my-2">
+            <div class="card-header">
+                <img src="{{comentario.foto }}" alt="Usuario" class="rounded-circle"/>   <strong >{{ comentario.nombre }} {{ comentario.apellidos }}</strong>,  <strong >{{ comentario.fecha }}
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ comentario.texto }}</p><br/>
+                {% if usuario.idUsu == comentario.idUsu %}
+                    <a href="?con=respuesta&ope=edit&idHilo={{comentario.idHilo}}&idRes={{ comentario.idRes}}">Editar</a>
+                        <a href="?con=respuesta&ope=delete&idHilo={{ comentario.idHilo}}&idRes={{ comentario.idRes }}">Borrar</a>
+                {% endif %}
+                <div class="float-right">
+                    <a  href="?con=respuesta&ope=increase&idRes={{ comentario.idRes }}&idHilo={{comentario.idHilo}}">  <i class="far fa-hand-point-up"></i>{{ comentario.positivos }}</a>
+                    <a  href="?con=respuesta&ope=decrease&idRes={{ comentario.idRes }}&idHilo={{comentario.idHilo}}"> <i class="far fa-hand-point-down"></i>{{ comentario.negativos }}</a>
+                </div>
+
+            </div>
+        </div>
+           
+    {% endfor %}
+{% endblock %}
