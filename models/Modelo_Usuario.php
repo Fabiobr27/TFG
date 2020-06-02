@@ -101,10 +101,10 @@ class Modelo_Usuario {
         return $db->getObject("Modelo_Usuario");
     }
     
-       public static function findFavo($codigoModelo): array {
+       public static function findFavo($codigoModelo ,$id): array {
         $db = Database::getInstance();;
 
-        $db->query("SELECT * FROM usuario us , modelo_usuario mu where  mu.codigoMod = $codigoModelo and mu.idUsu = us.idUsu and mu.idUsu = 10 ");
+        $db->query("SELECT * FROM usuario us , modelo_usuario mu where  mu.codigoMod = $codigoModelo and mu.idUsu = us.idUsu and mu.idUsu = $id ");
         $data = [];
         while ($obj = $db->getObject("Modelo_Usuario"))
             array_push($data, $obj);

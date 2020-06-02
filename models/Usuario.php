@@ -11,7 +11,7 @@ class Usuario {
     private $apellidos;
     private $fec_nac;
     private $foto;
-
+    private $SerMod;
     public function __construct() {
         
     }
@@ -80,7 +80,15 @@ class Usuario {
         return $this->foto;
     }
 
-    public function __toString() {
+    function getSerMod() {
+        return $this->SerMod;
+    }
+
+    function setSerMod($SerMod) {
+        $this->SerMod = $SerMod;
+    }
+
+        public function __toString() {
         try {
             return(string) $this->nombre;
         } catch (Exception $exception) {
@@ -129,6 +137,19 @@ class Usuario {
         return $db->getObject("Usuario");
     }
     
+    public static function MostrarMod() {
+
+
+        $db = Database::getInstance();
+        $db->query("SELECT * FROM usuario us where Sermod = 1  Order by nombre");
+
+        $data = [];
+        while ($obj = $db->getObject("Usuario"))
+            array_push($data, $obj);
+
+        //
+        return $data;
+    }
     
     
     public function eliminar() {
@@ -141,13 +162,33 @@ class Usuario {
         $tipo = "Admin";
         $db->query("Update usuario set Tipo ='$tipo' where idUsu={$this->idUsu};");
     }
+    
+       public function hacerMod() {
+        $db = Database::getInstance();
+        $tipo = "Moderador";
+        $db->query("Update usuario set Tipo ='$tipo' , SerMod = 0 where idUsu={$this->idUsu};");
+    }
+    
+    
+      public function NoSerMod() {
+        $db = Database::getInstance();
+        $SerMod = "0";
+        $db->query("Update usuario set SerMod ='$SerMod' where idUsu={$this->idUsu};");
+    }
+
+      public function SerMod() {
+        $db = Database::getInstance();
+        $SerMod = "1";
+        $db->query("Update usuario set SerMod ='$SerMod'  where idUsu={$this->idUsu};");
+    }
+
 
     public function insertar() {
         $db = Database::getInstance();
         $consulta = "INSERT INTO usuario (email,pass,nombre,apellidos,fec_nac)  values ('{$this->email}',md5('{$this->pass}'),'{$this->nombre}','{$this->apellidos}','{$this->fec_nac}');";
 
-
         $db->query($consulta);
+
         $this->idUsu = $db->lastId();
     }
 

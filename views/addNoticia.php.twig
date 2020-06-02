@@ -1,0 +1,21 @@
+{% extends "plantillaBase.php.twig" %}
+
+{% block contenido %}
+ <div class="card-header">
+     <h2 style="color: white ; text-align: center">Crear nueva Noticia</h2>
+            </div>
+    <form method="GET" class="form">
+        <input type="hidden" name="con" value="Noticia"/>
+        <input type="hidden" name="ope" value="add"/>
+
+        <input type="hidden" name="idUsu" value="{{ idUsu }}"/>
+        <label style="color: white" for="Titulo">Titulo: </label>
+        <textarea class="form-control" maxlength="300" rows="5" name="Titulo" required></textarea><br/>
+        <label style="color: white" for="Desarrollo">Desarrollo: </label>
+        <textarea class="form-control"  rows="5" name="Desarrollo" required></textarea><br/>
+        <button type="submit" class="btn btn-primary mx-2 my-2">Comentar</button>
+        <a href="index.php?con=Noticia&ope=listar"><button class="btn btn-danger">Cancelar</button></a>
+    </form>
+
+        
+{% endblock %}

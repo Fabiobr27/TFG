@@ -2,84 +2,117 @@
 
 {% block titulo %}
     <!--Fabio Benitez Ramirez-->
+    <link rel="stylesheet" href="estilos/anuncio.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#formButton").click(function () {
+                $("form").toggle();
+                $("#formButton").toggle();
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block contenido %}
 
 
     <p style="color: white">Bienvenido/a, {{ dat.nombre }}</p><br/>
-    <a href="?con=Anuncio&ope=add&idUsu={{ idUsu }}">+ Publicar nuevo Anuncio</a><br/>
 
-    
-        <div class="card my-2">
-            <div class="card-header">
-                {{anuncio.Cabecera}}  
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{anuncio.Descripcion}}</p><br/>     
 
-                <div class="float-left">
-                    <table id="tbl">
-                        <tr>
-                            <th>Marca</th>
-                            <td>{{anuncio.Marca}}</td>
-                        </tr>
-                        <tr>
-                            <th>Modelo </th>
-                            <td>{{anuncio.Modelo}}</td>
-                        </tr>
-                        <tr>
-                            <th>Color</th>
-                            <td>{{anuncio.color}}</td>
-                        </tr>
-                        <tr>
-                            <th>Año</th>
-                            <td>{{anuncio.Anio}}</td>
-                        </tr>
-                        <tr>
-                            <th>Kilometros</th>
-                            <td>{{anuncio.Kilometros}}</td>
-                        </tr>
-                        <tr>
-                            <th>Combustible</th>
-                            <td>{{anuncio.Combustible}}</td>
-                        </tr>  
-                         <tr>
-                            <th>Precio : </th>
-                            <td>{{anuncio.Precio}}</td>
-                        </tr>    
-                    </table>
-              
+    {% if item.idUsu == idUsu %}
 
+        <a  id="formButton" >Añadir Imagen</a>
+           <form   id="form1" action="" method="post">
+                    <input type="hidden" name="con" value="Anuncio" />
+                    <input type="hidden" name="ope" value="addImg" />
+                    <input type="hidden" name="idAnuncio" value={{anuncio.IdAnuncio}} />
+                    <input type="text" name="imagen" placeholder="Url de la imagen" required />
+
+                    <button type="submit">Insertar imagen</button>
+
+                </form>
+                    
+      
+
+    {% endif %}  
+    <div class="card my-2">
+        <div class="card-header">
+            {{anuncio.Cabecera}}  
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{anuncio.Descripcion}}</p><br/>     
+
+            <div class="float-left">
+                <table id="tbl">
+                    <tr>
+                        <th>Marca</th>
+                        <td>{{anuncio.Marca}}</td>
+                    </tr>
+                    <tr>
+                        <th>Modelo </th>
+                        <td>{{anuncio.Modelo}}</td>
+                    </tr>
+                    <tr>
+                        <th>Color</th>
+                        <td>{{anuncio.color}}</td>
+                    </tr>
+                    <tr>
+                        <th>Año</th>
+                        <td>{{anuncio.Anio}}</td>
+                    </tr>
+                    <tr>
+                        <th>Kilometros</th>
+                        <td>{{anuncio.Kilometros}}</td>
+                    </tr>
+                    <tr>
+                        <th>Combustible</th>
+                        <td>{{anuncio.Combustible}}</td>
+                    </tr>  
+                    <tr>
+                        <th>Precio : </th>
+                        <td>{{anuncio.Precio}}</td>
+                    </tr>    
+                </table>
+
+             
+                
+                <br>
                 {% if item.idUsu == idUsu %}
                     <a href="index.php?ope=delete&con=Anuncio&idAnuncio={{anuncio.IdAnuncio}}">Borrar</a>
-                    <a href="index.php?ope=edit&con=Anuncio&idAnuncio={{anuncioIdAnuncio}}">Editar</a>
-                {% endif %}
-                </div>
-                <div class="float-right">
-                    
-                    <img src="{{ anuncio.Imagen }}" width="500px" height="250px" alt="Usuario"/>  
-                </div>
-                <br>
-                
+                    <a href="index.php?ope=edit&con=Anuncio&idAnuncio={{anuncio.IdAnuncio}}">Editar</a>
 
+                {% endif %}  
 
             </div>
+            <div class="float-right">
+
+                <img src="{{ anuncio.Imagen }}" width="500px" height="250px" alt="Usuario"/>  
+            </div>
+
+
+
+
         </div>
-                <br>
-     <h1 style="color: white">Imagenes</h1>  <br>
+    </div>
+    <br>
+
+    <h1 style="color: white">Imagenes</h1>  <br>
     <div id="columnas" class="row mb-3">
-      
-        {% for item in img %}
+        {% if img is empty %}
+            <h3 style="color: white">En este momento no hay más imagenes</h3>
+        {% else %}
+            {% for item in img %}
 
-            <div class="col col-lg-6">
-                <div class="card mx-auto" style="width:25rem;">
-                    <img src="{{item.imagen}}" width="500px" height="150px"  class="card-img-top" />
-                   	
+                <div class="col col-lg-6">
+                    <div class="card mx-auto" style="width:25rem;">
+                        <img src="{{item.imagen}}" width="500px" height="150px"  class="card-img-top" />
+
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
-
+            {% endfor %}
+        {%endif %}
     </div>
 
 {% endblock %}

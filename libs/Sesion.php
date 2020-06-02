@@ -62,9 +62,11 @@
 
 			// buscamos el usuario
 			//$sql  = "SELECT * FROM usuario WHERE email=:ema AND pass=MD5(:pas) ; " ;
-			$sql = "SELECT * FROM usuario WHERE email='$ema' AND pass=MD5($pas) ;" ;
+			$sql = "SELECT * FROM usuario WHERE email='$ema' AND pass=MD5('$pas') ;" ;
 			$db->query($sql);
 
+                
+                
 			if ($user = $db->getObject("Usuario")):
 
 				// rescatar la información del usuario

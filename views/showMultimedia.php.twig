@@ -2,150 +2,8 @@
 
 {% block titulo %}
     <!--Fabio Benitez Ramirez-->
+        <link rel="stylesheet" href="estilos/multimedia.css">
 
-    <style>
-    
-  
-
- 
-
-    .container {
-      margin: 0 auto;
-      max-width: 1000px;
-    }
-
-
-
-    .menu {
-      color: white;
-      width: 20%;
-      float: left;
-      line-height: 40px;
-    }
-
-    a {
-      color: white;
-    }
-
-    .v-header {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      color: white;
-    }
-
-    .container {
-      max-width: 960px;
-      padding-left: 1rem;
-      padding-right: 1rem;
-      margin: auto;
-      text-align: center;
-    }
-
-    .fullscreen-video-wrap {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .fullscreen-video-wrap video {
-      min-height: 100%;
-      min-width: 100%;
-    }
-
-    .header-overlay {
-      height: 100vh;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      z-index: 1;
- 
-    }
-
-    .header-content {
-      z-index: 2;
-    }
-
-    .header-content h1 {
-      font-size: 50px;
-      margin-bottom: 0;
-    }
-
-    .header-content p {
-      font-size: 1.5rem;
-      display: block;
-      padding-bottom: 2rem;
-    }
-
-    .btn {
-      background: #fd4aa7;
-      color: #fff;
-      font-size: 1.2rem;
-      padding: 1rem 2rem;
-      text-decoration: none;
-      border-radius: 20%;
-    }
-
-    .section {
-      padding: 20px 0;
-    }
-
-    .section-b {
-      background: #333;
-      color: #fff;
-    }
-
-
-    @media(max-width:960px) {
-      .container {
-        padding-right: 3rem;
-        padding-left: 3rem;
-      }
-    }
-
-
-  
-
-    *,
-    *:before,
-    *:after {
-      -moz-box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Nunito', sans-serif;
-      color: #384047;
-    }
-
-    .wrapper {
-      max-width: 90%;
-      margin: 10px auto;
-      padding: 10px 20px;
-     
-      border-radius: 8px;
-    }
-
-    h1,
-    h2 {
-      margin: 30px 0;
-      text-align: center;
-    }
-
-    video,
-    audio,
-    .mejs-treehouse {
-      margin: 0 auto;
-      display: block;
-    }
-  </style>
-        
-     
 {% endblock %}
 
 {% block contenido %}
@@ -153,63 +11,38 @@
 
 
 
-    
-  <section class="section section-b">
-    <div class="container">
-      <h2>Quienes Somos</h2>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde, impedit amet minima iste autem cumque et
-        maiores blanditiis doloribus aut dolorum quaerat non est voluptatum, tempore ut dolorem voluptas quod quae
-        accusantium, ex inventore ducimus. Beatae mollitia exercitationem, quam similique, consectetur ratione
-        reprehenderit delectus neque eligendi facere soluta dolor ducimus!
 
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at rem fuga accusantium quae?
-        Incidunt et eveniet quos veritatis aperiam repellat recusandae iste fugit impedit doloribus minima enim, cum
-        quidem.
+    <section class="section section-b">
+        <div class="container">
+            <h2>Quienes Somos</h2>
+            <p>Esta pagina esta realizada como trabajo de final de grado para el Ciclo Formativo de Desarrollo de Aplicaciones Web, esta realizada con leguajes como php , javascript , jquery y css , para la mayoria de estilos he utilizado bootstrap, esta pagina tiene como finalidad aprender mas sobre el mundo del motor para ello tenemos un apartado de noticias y un for en el cual podras preguntar tus dudas y que los usuarios te las resuelvan . admenas hay un compra venta pos si de paso estas buscando algun coche. </p>
 
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Reprehenderit et sint dicta possimus molestiae, aliquam incidunt ea quam magnam voluptatum voluptatibus eius,
-        hic error enim facilis id. Quo, maiores voluptates?</p>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde, impedit amet minima iste autem cumque et
-        maiores blanditiis doloribus aut dolorum quaerat non est voluptatum, tempore ut dolorem voluptas quod quae
-        accusantium, ex inventore ducimus. Beatae mollitia exercitationem, quam similique, consectetur ratione
-        reprehenderit delectus neque eligendi facere soluta dolor ducimus!
+        </div>
+        <div>
+            <div class="wrapper">
 
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at rem fuga accusantium quae?
-        Incidunt et eveniet quos veritatis aperiam repellat recusandae iste fugit impedit doloribus minima enim, cum
-        quidem.
-
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Reprehenderit et sint dicta possimus molestiae, aliquam incidunt ea quam magnam voluptatum voluptatibus eius,
-        hic error enim facilis id. Quo, maiores voluptates?</p>
-    </div>
-    <div>
-      <div class="wrapper">
-
-        <h2>Video</h2>
-
-        <video controls width="800px">
-          <source src="imagenes/driftsupra.mp4"
-            type="video/mp4">
-          <source src=https://www.youtube.com/watch?v=c0EErkZ1EUk
-            type="video/ogg">
-          <track label="English" kind="subtitles" srclang="en" src="bridge-captions.vtt" default>
-        </video>
-
-        <h2>Audio </h2>
-
-        <audio controls width="800px">
-          <source src="imagenes/GTRsound.mp3"
-            type="audio/mp3">
-        </audio>
-
-      </div>
-
-  </section>
+                <h2>Videos</h2>
+                <div class="embed-responsive embed-responsive-16by9"> 
+                        
+                        <iframe  class="embed-responsive-item" src="https://www.youtube.com/embed/KyS2Wckan90" frameborder="3" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
 
 
-       
-   
+                <h2>Audios </h2>
+
+                <audio controls width="800px">
+                    <source src="imagenes/GTRsound.mp3"
+                            type="audio/mp3">
+                </audio>
+
+            </div>
+
+    </section>
 
 
 
-    {% endblock %}
+
+
+
+
+{% endblock %}

@@ -10,28 +10,44 @@
 {% block contenido %}
 
 
+    <table id="form1" class="table table-sm">
+        <thead >
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Email</th>
+                <th scope="col">Fecha Nacimiento</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Hacer Admin</th>
+                <th scope="col">Eliminar</th>
+            </tr>
+        </thead>
+        {% for item in dat %}
 
-    {% for item in dat  %}
-        <div style="position: relative; left: 500px;"class="col col-lg-3">
-            <div class="card bg-light mb-3 mx-auto" style="width:23rem;">
-                <img src="{{item.Foto}}" class="card-img-top" />
-                <div class="card-body text-center">
+            <tr>
+                <th scope="row">{{item.idUsu}}</th>
+                <td>{{item.nombre}}</td>
+                <td>{{item.Apellidos}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.Fecha}}</td>
+                <td>{{item.Tipo}}</td>
+                {% if item.Tipo == "Admin" %}
+                    <td>
+                        <span class="glyphicon glyphicon-ok"></span>
+                        </td>
+                    {%else%}
+                    <td><a href="index.php?con=Usuario&ope=hacerAdmin&id={{item.IdUsu}}">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </a></td>
+                    {%endif%}
 
-                    <h6 style="color: black" class="card-title">Nombre Usuario: {{item.Nombre}} </h6>
-                    <h6  style="color: black"class="card-title">Apellidos: {{item.Apellidos}}</h6>
-                    <h6 style="color: black" class="card-title">Fecha Nacimiento: {{item.Fecha}}</h6>
-                    <h6 style="color: black" class="card-title">Email: {{item.Email}}</h6>
-                    <h6 style="color: black" class="card-title">Tipo Usuario: {{item.Tipo}}</h6>
-
-                    <a class="btn btn-primary"  href="index.php?con=Usuario&ope=borrar&id={{item.IdUsu}}">Eliminar Cuenta</a><br>
-                    <br>
-    <a class="btn btn-primary"  href="index.php?con=Usuario&ope=hacerAdmin&id={{item.IdUsu}}">Hacer Admin</a><br>
-
-                </div>	<!-- end-card-body -->
-            </div>	<!-- end-card -->
-        </div>	<!-- end-col -->
-
-    {% endfor %}
+                <td> <a   href="index.php?con=Usuario&ope=borrar&id={{item.IdUsu}}">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a></td>
+            </tr>
+        {%endfor%}
+    </table>
 
 
 {% endblock %}

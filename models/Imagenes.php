@@ -53,9 +53,19 @@ class Imagenes {
     public static function find($idAnuncio) {
         $db = Database::getInstance();
         $db->query("SELECT *
-            FROM anuncio a , imagenes i WHERE   i.idAnuncio=$idAnuncio;");
+            FROM anuncio a , imagenes i WHERE  i.idAnuncio=$idAnuncio;");
         return $db->getObject();
     }
+    
+      public function insertar() {
+        $db = Database::getInstance();
+        
+        $sql ="INSERT INTO imagenes ( IdAnuncio, imagen) VALUES ({$this->idAnuncio},'{$this->imagen}');";
+   
+        //$db->query($sql);
+
+        echo $sql;  
+           }
     
     
 

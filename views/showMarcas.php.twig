@@ -3,18 +3,19 @@
 {% block titulo %}
     <!--Fabio Benitez Ramirez-->
     <h1 style="color: white" class="mt-4">MARCAS</h1>
-{% endblock %}
+   <link rel="stylesheet" href="estilos/marcas.css">
+    {% endblock %}
 
 {% block contenido %}
 
 
-   
 
-    <div id="columnas" class="row mb-3">
+
+    <div id="columnas" class="row mb-3 ">
         {% for item in dat %}
 
-            <div class="col col-lg-3">
-                <div class="card mx-auto" style="width:13rem;">
+            <div class="col col-lg-3 ">
+                <div class="card mx-auto" style="width:15rem;">
                     <img src="{{item.Logo}}" width="150" height="150"  class="card-img-top" />
                     <div class="card-body text-center">
                         <a href=" index.php?con=Modelo&ope=listar&id={{item.codigoMarca}}">
@@ -23,9 +24,9 @@
                         </a>
                     </div>	
                 </div>
+                        <br>
             </div>
         {% endfor %}
- 
 
-
-    {% endblock %}
+    </div>
+{% endblock %}

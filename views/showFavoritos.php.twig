@@ -3,6 +3,7 @@
 {% block titulo %}
     <!--FabioBenitez Ramirez-->
     <h1 class="mt-4">Favoritos</h1>
+  
 {% endblock %}
 
 {% block contenido %}
@@ -18,7 +19,7 @@
         {% for item in dat %}
 
             <div id="prueba" class="col  col-lg-3">
-                <div class="card mx-auto" style="width:12rem;">
+                <div class="card mx-auto" style="width:20rem;">
                     <img src="{{item.imagen}}" class="card-img-top" />
                     <div class="card-body text-center">
                         <h6 style="color: black" class="card-title">{{item.NombreMarca}}</h6>

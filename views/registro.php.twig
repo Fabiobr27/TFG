@@ -2,9 +2,7 @@
 {% extends "plantillaLogin.php.twig" %}
 
 {% block script %}
-    <style>
-     label { color: white; }
-    </style>
+  
     
     {% endblock %}
 
@@ -21,7 +19,7 @@
 
     <div class="row">
         <div class="col-sd-12 mx-auto">
-             <img class="logo"  width="500px "src="./imagenes/logo.svg" alt="ForoCarros" />
+             <img class="logo"  width="500px "src="./Imagenes/logo.svg" alt="ForoCarros" />
         </div>
     </div>
 
@@ -87,7 +85,11 @@
             </div>
 
 
-        </div>
+  {% if error %}
 
+            <p class="alert alert-danger">Email ya en uso</p>
+
+        {% endif %}
+        </div>
 
 {% endblock %}

@@ -20,21 +20,19 @@ class AnuncioController extends BaseController {
 
         echo $this->twig->render("showAnuncio.php.twig", ['dat' => $dat, 'idUsu' => $idUsu]);
     }
-        
+
     public function verMultimedia() {
-             $ses = Sesion::getInstance();
-          $idUsu = $ses->getUsuario();
+        $ses = Sesion::getInstance();
+        $idUsu = $ses->getUsuario();
 
-        echo $this->twig->render("showMultimedia.php.twig", [ 'idUsu' => $idUsu]);
-      
+        echo $this->twig->render("showMultimedia.php.twig", ['idUsu' => $idUsu]);
     }
-
 
     public function listarCreados() {
         $id = $_GET['id'];
         $dat = Anuncio::findAnuncio($id);
         $usu = Usuario::find($id);
-        echo $this->twig->render("showAnuncioCreados.php.twig", ['dat' => $dat, 'idUsu' => $id , 'usu' => $usu]);
+        echo $this->twig->render("showAnuncioCreados.php.twig", ['dat' => $dat, 'idUsu' => $id, 'usu' => $usu]);
     }
 
     public function add() {
@@ -74,7 +72,7 @@ class AnuncioController extends BaseController {
 
             $Anuncio->insertar();
 
-          //  header("location: index.php?con=Anuncio&ope=listar");
+            //  header("location: index.php?con=Anuncio&ope=listar");
         } else {
             echo $this->twig->render("addAnuncio.php.twig", ['idUsu' => $idUsu]);
         }
@@ -133,17 +131,37 @@ class AnuncioController extends BaseController {
         $idUsu = $id;
         $usuario = Usuario::find($idUsu);
         $Anuncio = Anuncio::find($idAnuncio);
-        $imagen = Imagenes::findAll($idAnuncio);
+        $imagen = Imagenes::find($idAnuncio);
         echo $this->twig->render("verAnuncio.php.twig", (['anuncio' => $Anuncio, 'img' => $imagen, 'usuario' => $usuario]));
     }
 
     public function delete() {
-        $idAnuncio= $_GET["idAnuncio"];
+        $idAnuncio = $_GET["idAnuncio"];
 
         Anuncio::borrar($idAnuncio);
         header("location:index.php?con=Anuncio&ope=listar");
     }
 
+    public function addImg() {
+    
+        
+            $Imagen = $_GET["imagen"];
+            $idAnuncio = $_GET["idAnuncio"];
 
+            $Anuncio = new Imagenes();
+
+            $Anuncio->setImagen($Imagen);
+            $Anuncio->setIdAnuncio($idAnuncio);
+
+
+
+
+
+
+            $Anuncio->insertar();
+
+            header("location: index.php?con=Anuncio&ope=listar");
+        
+    }
 
 }

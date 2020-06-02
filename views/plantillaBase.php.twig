@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>ForoCarros</title>
+        <title>Petrol Head</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
       <link href="./fontawesome/css/all.css" rel="stylesheet">
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <style>
+          
+          h1,th,td{
+              color: white;
+          }
+           
+          label{
+              color: white;
+          }
+      </style>
     {% block script %}{% endblock %}
+    
+    
 </head>
 <div class="container-flex">		
     <div class="navbar navbar-expand-lg navbar-light bg-light">
@@ -25,6 +40,9 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?con=Hilo&ope=listar">Foro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?con=Noticia&ope=listar">Noticias</a>
                 </li>
                 
                   <li class="nav-item">

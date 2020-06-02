@@ -27,10 +27,11 @@ class UsuarioController extends BaseController {
         $id = $sesion->getUsuario();
         $tip = Usuario::find($id);
         $dat = Usuario::find($id);
+        $mod = Usuario::MostrarMod();
         //$men = Usuario::findMensajes($id);
          // $hilo = Usuario::findHilos($id);
          // $anuncio = Usuario::findAnuncios($id);
-        echo $this->twig->render("showPerfil.php.twig", ['dat' => $dat, 'tip' => $tip]);
+        echo $this->twig->render("showPerfil.php.twig", ['dat' => $dat, 'tip' => $tip , 'mod' =>$mod]);
     }
 
     public function mostrarPerfilAjeno() {
@@ -39,10 +40,9 @@ class UsuarioController extends BaseController {
         $id = $_GET['id'];
         $tip = Usuario::find($idUsu);
         $dat = Usuario::find($id);
-        $men = Usuario::findMensajes($id);
         $hilo = Usuario::findHilos($id);
         $anuncio = Usuario::findAnuncios($id);
-        echo $this->twig->render("showPerfil.php.twig", ['dat' => $dat, 'men' => $men, 'hilo' => $hilo, 'anuncio' => $anuncio, 'tip' => $tip]);
+        echo $this->twig->render("showPerfilAjeno.php.twig", ['dat' => $dat, 'men' => $men, 'hilo' => $hilo, 'anuncio' => $anuncio, 'tip' => $tip]);
     }
 
     public function mostrarCuentas() {
@@ -93,9 +93,41 @@ class UsuarioController extends BaseController {
 
         header("Location: index.php?con=Usuario&ope=mostrarCuentas");
     }
+      public function SolicitarMod() {
+          $sesion = Sesion::getInstance();
+        $idU = $sesion->getUsuario();
+        $id = $_GET['id'];
+        $usu = Usuario::find($id);
 
+        $usu->SerMod();
+
+        header("Location: index.php?con=Usuario&ope=mostrarPerfil&id=$idU");
+    }
+ public function HacerMod() {
+          $sesion = Sesion::getInstance();
+        $idU = $sesion->getUsuario();
+        $id = $_GET['id'];
+        $usu = Usuario::find($id);
+
+        $usu->hacerMod();
+
+          header("Location: index.php?con=Usuario&ope=mostrarPerfil&id=$idU");
+    }
+    
+     public function NoHacerMod() {
+          $sesion = Sesion::getInstance();
+        $idU = $sesion->getUsuario();
+        $id = $_GET['id'];
+        $usu = Usuario::find($id);
+
+        $usu->NoSerMod();
+
+          header("Location: index.php?con=Usuario&ope=mostrarPerfil&id=$idU");
+    }
     public function editar() {
         // buscamos el tablero
+         $sesion = Sesion::getInstance();
+        $id = $sesion->getUsuario();
         $dat = Usuario::find($_GET["id"]);
 
         if (!isset($_GET["nom"])):
@@ -122,7 +154,7 @@ class UsuarioController extends BaseController {
             $dat->save();
 
             // redirigimos a la página principal
-            header("Location: index.php?con=Usuario&ope=mostrarPerfil&id=");
+            header("Location: index.php?con=Usuario&ope=mostrarPerfil&id=$id");
 
         endif;
     }

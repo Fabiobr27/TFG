@@ -1,0 +1,47 @@
+{% extends "plantillaBase.php.twig" %}
+
+{% block titulo %}
+    <!--Fabio Benitez Ramirez-->
+
+{% endblock %}
+
+{% block contenido %}
+
+
+
+
+    <div class="container">
+        <br/>
+        <h1 style="text-align: center">Blog de Noticias</h1>
+
+        {% for item in dat %}
+            <div class="alert alert-dark" role="alert">
+                <div class='card'>
+                    <div class='card-header'>
+                        <h2 style='color: black'>{{item.titulo}} </h2>
+                    </div>
+                    <div class="card-body">
+                        <p class='card-text'>{{item.desarrollo}}</p> 
+                        {% if item.idUsu == idUsu %}
+                            <a href="index.php?ope=delete&con=Noticia&idNoticia={{item.idNoticia}}">Borrar</a>
+                            <a href="index.php?ope=edit&con=Noticia&idNoticia={{item.idNoticia}}">Editar</a>
+                        {% endif %}
+                    </div> 
+
+
+                </div>
+
+
+
+
+            </div>
+
+        {% endfor %}
+
+          {% if tip.Tipo  == 'Moderador' or  tip.Tipo  =='Admin' %}
+                     <button type="button"  class="btn btn-info"><a href="index.php?ope=add&con=Noticia" style="color: white">Insertar una nueva Noticia</a></button>      
+                        {% endif %}
+
+
+    {% endblock %}
+

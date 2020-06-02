@@ -1,0 +1,46 @@
+   .over { max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        h6{
+            color: black
+        }
+        img{
+            padding: 20px;
+            width: 500px;
+            height:300px;
+
+        }
+
+        .content{
+            margin: 20px;
+            padding: 20px;
+        }
+        .row mb-2{background-color: red;
+                  margin: 20px;
+                  padding: 20px;
+        }
+        h6{
+            color: black;
+        }
+     
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        a {
+            color: #03658c;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, Helvetica, Sans-serif, Verdana;
+            background: #dee1e3;
+        }
+
+     

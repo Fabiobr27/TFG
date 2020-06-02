@@ -2,26 +2,34 @@
 
 {% block titulo %}
     <!--Fabio Benitez Ramirez-->
+       <link rel="stylesheet" href="estilos/hilo.css">
 {% endblock %}
 
 {% block contenido %}
 
 
-   
+
     <a href="?con=Hilo&ope=add&idUsu={{ idUsu }}">+ Publicar nuevo Hilo</a><br/>
+
     {% for item in dat %}
-        <div class="card my-2">
-            <div class="card-header">
-                <img src="{{ item.foto }}" alt="Usuario" class="rounded-circle" width="100px"/>   <a href="index.php?con=Usuario&ope=mostrarPerfilAjeno&id={{item.idUsu}}"><strong>{{ item.nombre }} {{ item.apellidos }}</strong></a>
+
+        <div class="media">
+
+            <div class="img">
+                <img  src="{{ item.foto }}"alt="Placeholder">
+                <a href="?con=Usuario&ope=MostrarPerfilAjeno&id={{item.idUsu}}">{{item.nombre }} {{item.apellidos}} </a>
             </div>
-            <div class="card-body">
-                <p class="card-text">{{item.titulo}}</p><br/>
-                <div class="float-left">
-                    <i>{{ item.fecha}} </i>{{ men }}
-                </div>
+            <h2 class="title">{{item.titulo}} </h2>
+            <div class="content">
+                <p>{{item.texto}}</p>
+            </div>
+            <div class="footer">
+                {{ item.fecha}} 
                 <div class="float-right">
-                    <i class="far fa-hand-point-up"></i>{{ item.positivos }}
-                    <i href="?con=Hilo&ope=decrease&idHilo={{ item.idHilo }}" class="far fa-hand-point-down"></i>{{ item.negativos }}
+              
+                    <i class="glyphicon glyphicon-thumbs-up">{{ item.positivos }}</i>
+                   
+                    <i class="glyphicon glyphicon-thumbs-down">{{ item.negativos }}</i>
                 </div>
                 <br>
                 <a href="index.php?con=Hilo&ope=ver&id={{item.idHilo}}">Ver</a>
@@ -30,10 +38,11 @@
                     <a href="index.php?ope=edit&con=Hilo&idHilo={{item.idHilo}}">Editar</a>
                 {% endif %}
 
-
             </div>
         </div>
+
     {% endfor %}
 
 {% endblock %}
+
 
