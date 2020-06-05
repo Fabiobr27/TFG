@@ -1,0 +1,35 @@
+
+
+
+
+{% for item in dat %}
+
+    <div class="media">
+
+        <div class="img">
+            <img  src="{{ item.foto }}"alt="Placeholder">
+            <a href="?con=Usuario&ope=MostrarPerfilAjeno&id={{item.idUsu}}">{{item.nombre }} {{item.apellidos}} </a>
+        </div>
+        <h2 class="title">{{item.titulo}} </h2>
+        <div class="content">
+            <p>{{item.texto}}</p>
+        </div>
+        <div class="footer">
+            {{ item.fecha}} 
+            <div class="float-right">
+
+                <i class="glyphicon glyphicon-thumbs-up">{{ item.positivos }}</i>
+
+                <i class="glyphicon glyphicon-thumbs-down">{{ item.negativos }}</i>
+            </div>
+            <br>
+            <a href="index.php?con=Hilo&ope=ver&id={{item.idHilo}}">Ver</a>
+            {% if item.idUsu == idUsu %}
+                <a href="index.php?ope=delete&con=Hilo&idHilo={{item.idHilo}}">Borrar</a>
+                <a href="index.php?ope=edit&con=Hilo&idHilo={{item.idHilo}}">Editar</a>
+            {% endif %}
+
+        </div>
+    </div>
+{%endfor%}
+

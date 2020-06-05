@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Petrol Head</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="./fontawesome/css/all.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <style>
+
+            h1,th,td{
+                color: white;
+            }
+
+            label{
+                color: white;
+            }
+        </style>
+    {% block script %}{% endblock %}
+
+
+</head>
+<div class="container-flex">		
+    <div class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">PETROL HEAD</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.php?con=Marca&ope=listar">Inicio</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?con=Favoritos&ope=listar">Favoritos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?con=Hilo&ope=listar">Foro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?con=Noticia&ope=listar">Noticias</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?con=Anuncio&ope=listar">Compra-venta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?con=Anuncio&ope=verMultimedia">Multimedia</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?con=Usuario&ope=mostrarPerfil">Perfil</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?con=login&ope=logout">Salir</a>
+                </li>
+
+
+            </ul> 
+
+        </div>	<!-- end-collapse -->
+
+
+
+    </div>	<!-- end-navbar -->
+    <body class="card text-dark bg-dark mb-3">
+
+        <div class="container">
+
+        {% block titulo %}{% endblock %}
+
+        {% block contenido %}
+        {% endblock %}
+
+    </div>  
+
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"></script>
+
+{% block script1 %}{% endblock %}
+</body>
+</html>

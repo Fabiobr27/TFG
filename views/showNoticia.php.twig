@@ -1,0 +1,80 @@
+{% extends "plantillaBase.php.twig" %}
+
+{% block titulo %}
+    <!--Fabio Benitez Ramirez-->
+
+{% endblock %}
+
+{% block contenido %}
+
+
+
+
+    <div class="container">
+        <br/>
+        <h1 style="text-align: center">Blog de Noticias</h1>
+
+        {% for item in dat %}
+            <div class="alert alert-dark" role="alert">
+                <div class='card'>
+                    <div class='card-header'>
+                        <h2 style='color: black'>{{item.titulo}} </h2>
+                    </div>
+                    <div class="card-body">
+                        <p class='card-text'>{{item.desarrollo}}</p> 
+                        {% if item.idUsu == idUsu %}
+                            <a href="index.php?ope=delete&con=Noticia&idNoticia={{item.idNoticia}}">Borrar</a>
+                            <a href="index.php?ope=edit&con=Noticia&idNoticia={{item.idNoticia}}">Editar</a>
+                        {% endif %}
+                    </div> 
+
+
+                </div>
+
+
+
+
+            </div>
+
+        {% endfor %}
+
+        {% if tip.Tipo  == 'Moderador' or  tip.Tipo  =='Admin' %}
+            <button type="button"  class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Insertar una nueva Noticia</button>      
+        {% endif %}
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Insertar una nueva Noticia</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div> 
+                    <form method="GET" class="form">
+                        <div class="modal-body">
+
+                            <input type="hidden" name="con" value="Noticia"/>
+                            <input type="hidden" name="ope" value="add"/>
+
+                            <input type="hidden" name="idUsu" value="{{ idUsu }}"/>
+                            <label style="color: black" for="Titulo">Titulo: </label>
+                            <textarea class="form-control" maxlength="300" rows="5" name="Titulo" required></textarea><br/>
+                            <label style="color: black" for="Desarrollo">Desarrollo: </label>
+                            <textarea class="form-control"  rows="5" name="Desarrollo" required></textarea><br/>
+                           
+                           
+                  
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Insertar</button>
+                </div>  </form>
+            </div>
+        </div>
+    </div>
+                            
+{% endblock %}
+

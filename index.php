@@ -1,20 +1,13 @@
 <?php
-//Fabio Benitez Ramirez
-require_once "libs/Data.php";
 
-$con = $_GET["con"] ?? "Login";
-$ope = $_GET["ope"] ?? "mostrar";
+    $control = $_GET["con"]??$_POST["con"]??"login";
+    $operacion = $_GET["ope"]??$_POST["ope"]??"show";
 
+    $name = "{$control}Controller";
 
-// creamos el nombre completo del controlador
-$nom = "{$con}Controller";
+	require_once "controllers/$name.php";
 
-// importar el controlador necesario
-require_once "controladores/$nom.php";
+	$controller = new $name();
 
-// instanciamos el controlador
-$controller = new $nom();
-
-// invocamos la operación a realizar
-$controller->$ope();
+	$controller->$operacion();
 
