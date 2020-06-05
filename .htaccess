@@ -1,0 +1,11 @@
+Options -Indexes
+RewriteEngine on
+
+RewriteRule ^$ 								index.php?con=Modelo&ope=listar&id=$1 [L]
+RewriteRule ^Marca/ver$ 					index.php?ope=listar&con=Marca	 [L]
+RewriteRule ^Marca/anadir$ 				index.php?ope=anadir&con=Marca[L]
+RewriteRule ^Marca/editar/([1-9][0-9]*)$  index.php?ope=edit&con=Marca&id=$1 [L]
+
+RewriteRule ^nota/anadir/([1-9][0-9]*)$		index.php?ope=anadir&con=nota&id=$1 [L]
+RewriteRule ^nota/editar/([1-9][0-9]*)$  index.php?ope=editar&con=nota&id=$1 [L]
+RewriteRule ^Favoritos/ver$ 					index.php?con=Favoritos&ope=listar	 [L]

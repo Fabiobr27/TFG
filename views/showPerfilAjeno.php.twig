@@ -1,0 +1,46 @@
+{% extends "plantillaBase.php.twig" %}
+
+{% block titulo %}
+    <!--Fabio Benitez Ramirez-->
+    <h1 class="mt-4">Perfil Ajeno</h1>
+    
+{% endblock %}
+
+{% block contenido %}
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+
+
+                <div class="card bg-light mb-3 mx-auto" style="width:23rem;"> 
+                    <img src="{{dat.foto}}" class="card-img-top" />
+                    <div class="card-body text-center">
+                        <h6 style="color: black" class="card-title">Nombre Usuario: {{dat.Nombre}} </h6>
+                        <h6  style="color: black"class="card-title">Apellidos: {{dat.Apellidos}}</h6>
+                        <h6 style="color: black" class="card-title">Fecha Nacimiento: {{dat.Fecha}}</h6>
+                        <h6 style="color: black" class="card-title">Email: {{dat.Email}}</h6>
+                        <h6 style="color: black" class="card-title">Tipo Usuario: {{dat.Tipo}}</h6>
+
+                        
+                       
+                        <a class="btn "  href="index.php?con=Anuncio&ope=listarCreados&id={{dat.idUsu}}">Ver Anuncios</a>
+
+                        <a class="btn "  href="index.php?con=Hilo&ope=listarCreados&id={{dat.idUsu}}">Ver Hilos</a>
+
+                        
+
+                </div>	<!-- end-card-body -->  
+            </div>	<!-- end-card -->
+          
+
+
+
+
+
+            </div>	<!-- end-col -->
+
+        </div>
+    {% endblock %}

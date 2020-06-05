@@ -1,0 +1,82 @@
+{% extends "plantillaLogin.php.twig" %}
+
+{% block titulo %}
+    <!--Fabio Benitez Ramirez-->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#formButton").click(function () {
+                $("li").toggle();
+                $("#formButton").toggle();
+            });
+        });
+    </script>
+
+{% endblock %}
+{% block contenido %}
+
+
+    <!-- Demo navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <div class="container"><a href="#" class="navbar-brand">
+                <ul class="navbar-nav mr-auto">
+                    <b>Petrol Head</b></a>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+
+
+                <a class="nav-link" href="index.php?con=login&ope=registro" style="color: white">Registro</a>
+                <a class="nav-link" id="formButton" style="color: white">Login</a>
+
+            </ul>    
+            <li  id="form1" class="navbar-nav ml-auto">
+
+
+
+                <form action="" method="post">
+                    <input type="hidden" name="con" value="login" />
+                    <input type="hidden" name="ope" value="signin" />
+                    <input type="text" name="email" placeholder="correo electrónico" required />
+                    <input type="password" name="pass" placeholder="contraseña" required />
+                    <button type="submit">Iniciar Sesion</button>
+
+                </form>
+
+            </li>
+        </div>
+        {% if error %}
+    
+            <p class="alert alert-danger">Usuario o contraseña incorrectas.</p>
+
+        {% endif %}
+    </div>
+
+</nav>
+
+<!-- End -->
+
+
+<!-- Background video -->
+<div class="video-background-holder">
+    <div class="video-background-overlay"></div>
+    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+        <source  src=imagenes/drift.mp4 type="video/mp4">
+    </video>
+    <div class="video-background-content container h-100">
+        <div class="d-flex h-100 text-center align-items-center">
+            <div class="w-100 text-white">
+                <h1>PETROL HEAD</h1>
+                <p>Trabajo Final de Grado</p>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End -->
+
+
+
+{% endblock %}
