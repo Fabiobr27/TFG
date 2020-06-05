@@ -1,0 +1,89 @@
+{% extends "plantillaBase.php.twig" %}
+
+{% block contenido %}
+
+
+    <a href="index.php?con=Hilo&ope=listar">Volver</a><br/>    <h1 style="color:white"> HILO</h1>
+    <div class="card my-2">
+        <div class="card-header">
+            <img src="{{ pos.foto }}" alt="Usuario" class="rounded-circle"/>    <a href="?con=Usuario&ope=MostrarPerfilAjeno&id={{pos.idUsu}}">{{ pos.nombre }} {{pos.apellidos }}</strong>,</a><strong> {{ pos.fecha}}
+        </div>
+        <div style="color: black" class="card-body">
+
+            <p class="card-text">{{ pos.titulo }}</p><br/>
+            <p class="card-text">{{ pos.texto }}</p><br/>
+
+            {% if usuario.idUsu == pos.idUsu %}
+                <a href="index.php?ope=delete&con=Hilo&id={{ pos.idHilo }}">Borrar</a>
+                <a href="index.php?con=Hilo&ope=edit&idHilo={{ pos.idHilo }}">Editar</a>
+            {% endif %}
+            <div class="float-right">
+
+                <a  href="?con=Hilo&ope=increase&idHilo={{ pos.idHilo }}"> <svg class="bi bi-hand-thumbs-up" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+
+                        <i class="glyphicon glyphicon-thumbs-up">
+                        </i> {{ pos.positivos }}</a>
+
+                <a  href="?con=Hilo&ope=decrease&idHilo={{ pos.idHilo  }}">
+                    <i class="glyphicon glyphicon-thumbs-down"></i>
+                    {{ pos.negativos }}</a>
+            </div>
+
+        </div>
+    </div>
+    <h1 style="color:white"> Comentarios</h1>
+    
+    <button type="button"  class="btn btn-info" data-toggle="modal" data-target="#ModalCom">Publicar Comentario</button>     
+    {% for comentario in data %}
+        <div class="card my-2">
+            <div class="card-header">
+                <img src="{{comentario.foto }}" alt="Usuario" class="rounded-circle"/>   <a href="?con=Usuario&ope=MostrarPerfilAjeno&id={{comentario.idUsu}}">  <strong >{{ comentario.nombre }} {{ comentario.apellidos }}</strong>,</a>   <strong >{{ comentario.fecha }}
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ comentario.texto }}</p><br/>
+                {% if usuario.idUsu == comentario.idUsu %}
+                    <a href="?con=respuesta&ope=edit&idHilo={{comentario.idHilo}}&idRes={{ comentario.idRes}}">Editar</a>
+                    <a href="?con=respuesta&ope=delete&idHilo={{ comentario.idHilo}}&idRes={{ comentario.idRes }}">Borrar</a>
+                {% endif %}
+                <div class="float-right">
+                    <a  href="?con=respuesta&ope=increase&idRes={{ comentario.idRes }}&idHilo={{comentario.idHilo}}">  <i class="glyphicon glyphicon-thumbs-up"></i>{{ comentario.positivos }}</a>
+                    <a  href="?con=respuesta&ope=decrease&idRes={{ comentario.idRes }}&idHilo={{comentario.idHilo}}"> <i class="glyphicon glyphicon-thumbs-down"></i>{{ comentario.negativos }}</a>
+                </div>
+
+            </div>
+        </div>
+
+    {% endfor %}
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="ModalCom" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Insertar una nuevo Hilo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div> 
+                <form method="GET" class="form">
+                    <input type="hidden" name="con" value="respuesta"/>
+                    <input type="hidden" name="ope" value="add"/>
+                    <input type="hidden" name="idUsu" value="{{ idUsu }}"/>
+                    <input type="hidden" name="idHilo" value="{{ idHilo }}"/>
+
+                    <label class="col-form-label" for="nombre" style="color: black">Escribe tu comentario nuevo (max. 300 caracteres)</label>
+                    <textarea class="form-control" maxlength="300" rows="5" name="texto" required></textarea><br/>
+
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Insertar</button>
+                    </div>
+            </div>  </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "plantilla.base.php.twig" %}
+
+{% block contenido %}
+		<img id="fondo" src="img/fondo.jpg"/>
+
+    <div class="row justify-content-center align-items-center min">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-sd-12 mx-auto">
+                    <img class="logo" src="./imagenes/logo.svg" alt="PetrolHead" />
+                </div>
+            </div>
+        
+            <!-- formulario de login -->
+            <form action="" method="post">
+                <input type="hidden" name="con" value="login"/>
+                <input type="hidden" name="ope" value="signin"/>
+                <!-- email -->
+                <div class="row mt-5 form-group">
+                    <div class="col-md-12">
+                        <input class="form-control w-25 mx-auto" type="text" 
+                                name="email" placeholder="correo electrónico" required />
+                    </div>
+                </div>
+
+                <!-- contraseña -->
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <input class="form-control w-25 mx-auto" type="password" 
+                                name="pass" placeholder="contraseña" required />
+                    </div>
+                </div>
+
+
+                {# if ((isset($ok)) && (!$ok)): #}
+                {% if error %}
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="alert alert-danger w-25 mx-auto" role="alert">
+                            Usuario o contraseña incorrectas.
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+
+                <!-- botón LOGIN -->
+                <div class="row form-group">
+                    <div class="col-md-12 text-center">
+                        <button class="btn btn-primary w-25" type="submit">Entrar</button>
+                    </div>
+                </div>
+
+
+            </form>
+
+            <!-- acceso REGSISTRO -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <form action="" method="get">
+                        <input type="hidden" name="con" value="login"/>
+                        <input type="hidden" name="ope" value="registro"/>
+                        <button class="btn btn-light w-25" type="submit">registrar</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "plantillaBase.php.twig" %}
+{% block script %}
+    <!--Fabio Benitez Ramirez-->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="estilos/css/especificacion.css">
+    
+
+{% endblock %}
+{% block titulo %}
+    <h1 class="mt-4">Especificacion</h1>
+
+{% endblock %}
+
+{% block contenido %}
+   {% if usu.Tipo == 'Admin'  or usu.Tipo == 'Moderador'   %}
+                       <a  style="color:white;"href="index.php?con=especificaciones&ope=anadir&id={{tab.codigoMod}}">Añadir Especificación<a/>
+        {% endif %}
+        {% for item in dat %}
+            <br>
+            <div class="col col-lg-3">
+              
+                <div class="card bg-light mb-3 mx-auto" style="width:25rem;">
+                       
+                {% if usu.Tipo == 'Admin' or usu.Tipo == 'Moderador'  %}
+                       
+        <a href="index.php?con=especificaciones&ope=borrar&id={{item.codEspe}}&cod={{tab.codigoMod}}">Eliminar Especificación<a/>
+        {% endif %}
+        
+        
+                    <img src="{{tab.Imagen}}" class="card-img-top" />
+                    <div class="card-body text-center">
+
+
+                        <h6 class="card-title">Caballos: {{item.Caballos}}</h6>
+                        <h6 class="card-title">Combustible: {{item.Combustible}}</h6>
+                        <h6 class="card-title">Año:{{item.Año}}</h6>
+                        <h6 class="card-title">codEspe:{{item.codEspe}}</h6>
+
+
+                       
+                          
+                          {% if fav is empty %}
+                                    <a class="btn btn-primary"  href="index.php?con=Favoritos&ope=anadirFavo&cod={{item.codigoMod}}">Añadir a favoritos</a><br>
+                                    <br>
+                                    {%else%}
+                                        <a class="btn "   href="index.php?con=Favoritos&ope=eliminarFav&cod={{item.codigoMod}}">Eliminar de favoritos</a>
+                                    <a class="btn "  href="index.php?con=Favoritos&ope=anadirFav&cod={{item.codigoMod}}">Añadir a favoritos</a><br>
+                                    <br>
+                                {% endif %}
+                                
+                       
+                          
+                       
+
+                       
+                    </div>	<!-- end-card-body -->
+                 
+                </div>	<!-- end-card -->
+                 
+            </div>	<!-- end-col -->
+            <br>
+        {%endfor%}
+    {% endblock %}
