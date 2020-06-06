@@ -1,6 +1,6 @@
 <?php
 
-// Modelo Anuncio
+// Modelo Hilo
 //Fabio Benitez Ramirez
 require_once "libs/Database.php";
 
@@ -9,81 +9,91 @@ require_once "libs/Database.php";
  * @author Fabio Benitez Ramirez 
  */
 class Anuncio {
-    
+
     /**
      * idUsu
      *
      * @var mixed
      */
-    private $idUsu;    
+    private $idUsu;
+
     /**
      * Modelo
      *
      * @var mixed
      */
-    private $Modelo;    
+    private $Modelo;
+
     /**
      * Anio
      *
      * @var mixed
      */
-    private $Anio;    
+    private $Anio;
+
     /**
      * Combustible
      *
      * @var mixed
      */
-    private $Combustible;    
+    private $Combustible;
+
     /**
      * Imagen
      *
      * @var mixed
      */
-    private $Imagen;    
+    private $Imagen;
+
     /**
      * Precio
      *
      * @var mixed
-     */    
- 
-    private $Precio;    
+     */
+    private $Precio;
+
     /**
      * color
      *
      * @var mixed
      */
-    private $color;    
+    private $color;
+
     /**
      * Kilometros
      *
      * @var mixed
      */
-    private $Kilometros;    
+    private $Kilometros;
+
     /**
      * Telefono
      *
      * @var mixed
      */
-    private $Telefono;    
+    private $Telefono;
+
     /**
      * Descripcion
      *
      * @var mixed
      */
-    private $Descripcion;    
+    private $Descripcion;
+
     /**
      * Cabecera
      *
      * @var mixed
      */
-    private $Cabecera;    
+    private $Cabecera;
+
     /**
      * Marca
      *
      * @var mixed
      */
     private $Marca;
-    
+
     /**
      * __construct
      *
@@ -146,7 +156,7 @@ class Anuncio {
     function getImagen() {
         return $this->Imagen;
     }
-    
+
     /**
      * getPrecio
      *
@@ -155,7 +165,7 @@ class Anuncio {
     function getPrecio() {
         return $this->Precio;
     }
-    
+
     /**
      * getColor
      *
@@ -164,7 +174,7 @@ class Anuncio {
     function getColor() {
         return $this->color;
     }
-    
+
     /**
      * getKilometros
      *
@@ -173,7 +183,7 @@ class Anuncio {
     function getKilometros() {
         return $this->Kilometros;
     }
-    
+
     /**
      * getTelefono
      *
@@ -182,7 +192,7 @@ class Anuncio {
     function getTelefono() {
         return $this->Telefono;
     }
-    
+
     /**
      * getDescripcion
      *
@@ -191,7 +201,7 @@ class Anuncio {
     function getDescripcion() {
         return $this->Descripcion;
     }
-    
+
     /**
      * setIdAnuncio
      *
@@ -201,7 +211,7 @@ class Anuncio {
     function setIdAnuncio($idAnuncio) {
         $this->idAnuncio = $idAnuncio;
     }
-    
+
     /**
      * setIdUsu
      *
@@ -211,7 +221,7 @@ class Anuncio {
     function setIdUsu($idUsu) {
         $this->idUsu = $idUsu;
     }
-    
+
     /**
      * setModelo
      *
@@ -221,7 +231,7 @@ class Anuncio {
     function setModelo($Modelo) {
         $this->Modelo = $Modelo;
     }
-    
+
     /**
      * setAnio
      *
@@ -231,7 +241,7 @@ class Anuncio {
     function setAnio($Anio) {
         $this->Anio = $Anio;
     }
-    
+
     /**
      * setCombustible
      *
@@ -241,7 +251,7 @@ class Anuncio {
     function setCombustible($Combustible) {
         $this->Combustible = $Combustible;
     }
-    
+
     /**
      * setImagen
      *
@@ -251,7 +261,7 @@ class Anuncio {
     function setImagen($Imagen) {
         $this->Imagen = $Imagen;
     }
-    
+
     /**
      * setPrecio
      *
@@ -261,7 +271,7 @@ class Anuncio {
     function setPrecio($Precio) {
         $this->Precio = $Precio;
     }
-    
+
     /**
      * setColor
      *
@@ -271,7 +281,7 @@ class Anuncio {
     function setColor($color) {
         $this->color = $color;
     }
-    
+
     /**
      * setKilometros
      *
@@ -281,7 +291,7 @@ class Anuncio {
     function setKilometros($Kilometros) {
         $this->Kilometros = $Kilometros;
     }
-    
+
     /**
      * setTelefono
      *
@@ -291,7 +301,7 @@ class Anuncio {
     function setTelefono($Telefono) {
         $this->Telefono = $Telefono;
     }
-    
+
     /**
      * setDescripcion
      *
@@ -301,7 +311,7 @@ class Anuncio {
     function setDescripcion($Descripcion) {
         $this->Descripcion = $Descripcion;
     }
-    
+
     /**
      * getCabecera
      *
@@ -310,7 +320,7 @@ class Anuncio {
     function getCabecera() {
         return $this->Cabecera;
     }
-    
+
     /**
      * setCabecera
      *
@@ -320,7 +330,7 @@ class Anuncio {
     function setCabecera($cabecera) {
         $this->Cabecera = $cabecera;
     }
-    
+
     /**
      * getMarca
      *
@@ -329,7 +339,7 @@ class Anuncio {
     function getMarca() {
         return $this->Marca;
     }
-    
+
     /**
      * setMarca
      *
@@ -387,8 +397,7 @@ class Anuncio {
 
         return $data;
     }
-
-    /**
+ /**
      * this function insert the ad in the database
      *
      * @return void
@@ -400,8 +409,8 @@ class Anuncio {
                         {$this->Precio} , {$this->Kilometros} , {$this->Anio}, '{$this->Combustible}','{$this->Modelo}','{$this->Telefono}','{$this->Imagen}' ,'{$this->Marca}','{$this->Cabecera}');";
 
         $db->query($sql);
-    }
 
+          }
     /**
      * Delete the add whis a id = $idAnuncio
      *
@@ -413,6 +422,7 @@ class Anuncio {
         $db->query("DELETE FROM anuncio WHERE idAnuncio=$idAnuncio;");
     }
 
+    
     /**
      * Updte the ad in the database where the idAd = $idAnuncio
      *
@@ -424,6 +434,8 @@ class Anuncio {
         $sql = "UPDATE anuncio SET Descripcion='{$this->Descripcion}', Anio = '{$this->Anio}', precio='{$this->Precio}', Modelo='{$this->Modelo}', Marca='{$this->Marca}' , Cabecera='{$this->Cabecera}'"
                 . ", Telefono='{$this->Telefono}', Kilometros='{$this->Kilometros}', color='{$this->color}' , combustible='{$this->Combustible}' , imagen='{$this->Imagen}' WHERE idAnuncio=$idAnuncio";
         $db->query($sql);
+
+     
     }
 
 }

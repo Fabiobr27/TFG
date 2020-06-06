@@ -1,32 +1,80 @@
 {% extends "plantillaBase.php.twig" %}
 
 {% block titulo %}
-<h1 class="mt-4">Tableros: Editar</h1>
+    <h1 class="mt-4">Editar Perfil</h1>
 {% endblock %}
 
 {% block contenido %}
 
-		<form action="index.php" method="get">
-			<input type="hidden" name="con" value="Usuario" />
-			<input type="hidden" name="ope" value="editar" />
+    <form action="index.php" method="get">
+        <input type="hidden" name="con" value="Usuario" />
+        <input type="hidden" name="ope" value="editar" />
+        <input type="hidden" name="id" value="{{dat.idUsu}}" />
 
-			<label for="id">ID: </label>
-			<input type="text" id="id" name="id" value="{{dat.idUsu}}" readonly />
-			<br/>			
-			<label for="nom">Nombre: </label>
-			<input type="text" id="nom" name="nom" value="{{dat.Nombre}} " />
-			<br/>
-                        <label for="nom">Apellidos </label>
-			<input type="text" id="ape" name="ape" value="{{dat.Apellidos}} " />
-			<br/>
-                        <label for="nom"> Email:</label>
-                       
-			<input type="text" id="ema" name="ema" value="{{dat.Email}} " />
-			<br/>
-			<label for="fec">Fecha de creación: </label>
-			<input type="date" id="fec" name="fec" value="{{dat.Fecha}}" />
-			<br/>
-			<button type="submit">Guardar</button>
-		</form>
+
+
+        <div class="row">
+            <div class="col-sd-12 mx-auto">
+                <img class="logo"  width="500px "src="./Imagenes/logo.svg" alt="ForoCarros" />
+            </div>
+        </div>
+
+
+
+        <div class="row form-group">
+            <div class="col-md-4 mx-auto">
+                <label class="col-form-label" for="email">Nombre de usuario:</label>
+                <input class="form-control" type="email" name="ema"  value="{{dat.email}}"/>
+            </div>
+        </div>
+
+
+        <div class="row form-group">
+            <div class="col-md-4 mx-auto">
+                <label  class="col-form-label" for="nombre">Nombre:</label>
+                <input class="form-control" type="text" name="nom" value="{{dat.nombre}}"/>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-4 mx-auto">
+                <label class="col-form-label" for="apellidos">Apellidos:</label>
+                <input class="form-control" type="text" name="ape" value="{{dat.Apellidos}}" />
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="row form-group">
+            <div class="col-md-4 mx-auto">
+                <label class="col-form-label" for="fec">Fecha de Nacimiento:</label>
+                <input class="form-control" type="date" name="fec" value="{{dat.Fecha}}" />
+            </div>
+        </div>
+
+
+        <div class="row form-group">
+            <div class="col-md-4 mx-auto">
+                <button class="btn btn-primary w-100" type="submit">Editar</button>
+            </div>
+        </div>
+    </form>
+
+
+    <div class="row">
+        <div class="col-md-4 mx-auto text-center">
+            <a href="index.php" class="btn btn-link">volver atrás</a>
+        </div>
+    </div>
+
+
+
+
+
+
+</form>
 
 {% endblock %}

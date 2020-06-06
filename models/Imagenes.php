@@ -2,7 +2,6 @@
 
 require_once "libs/Database.php";
 require_once "models/Anuncio.php";
-
 /**
  * Class Imagenes
  * @author Fabio Benitez Ramirez
@@ -110,18 +109,21 @@ class Imagenes {
 
         return $data;
     }
-
-    /**
+        /**
      * you get the photos of the same ad and teh id of the ad = $idAnuncio
      *
      * @param  mixed $idAnuncio
      * @return void
      */
+    
     public static function find($idAnuncio) {
         $db = Database::getInstance();
         $db->query("SELECT *
             FROM anuncio a , imagenes i WHERE  i.idAnuncio=$idAnuncio;");
         return $db->getObject();
     }
+    
+     
+    
 
 }

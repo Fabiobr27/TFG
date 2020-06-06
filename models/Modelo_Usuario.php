@@ -12,32 +12,35 @@ require_once "libs/Sesion.php";
  * @author Fabio Benitez Ramirez
  */
 class Modelo_Usuario {
-    
+
     /**
      * CodigoMod
      *
      * @var mixed
      */
-    private $CodigoMod;    
+    private $CodigoMod;
+
     /**
      * idUsu
      *
      * @var mixed
      */
-    private $idUsu;    
+    private $idUsu;
+
     /**
      * favorito
      *
      * @var mixed
      */
-    private $favorito;    
+    private $favorito;
+
     /**
      * Comentario
      *
      * @var mixed
      */
     private $Comentario;
-    
+
     /**
      * __construct
      *
@@ -46,7 +49,7 @@ class Modelo_Usuario {
     public function __construct() {
         
     }
-    
+
     /**
      * getidUsu
      *
@@ -55,7 +58,7 @@ class Modelo_Usuario {
     public function getidUsu() {
         return $this->idUsu;
     }
-    
+
     /**
      * setidUsu
      *
@@ -67,7 +70,7 @@ class Modelo_Usuario {
 
         return $this;
     }
-    
+
     /**
      * getfavorito
      *
@@ -76,7 +79,7 @@ class Modelo_Usuario {
     public function getfavorito() {
         return $this->favorito;
     }
-    
+
     /**
      * setfavorito
      *
@@ -88,7 +91,7 @@ class Modelo_Usuario {
 
         return $this;
     }
-    
+
     /**
      * getComentario
      *
@@ -97,7 +100,7 @@ class Modelo_Usuario {
     function getComentario() {
         return $this->Comentario;
     }
-    
+
     /**
      * setComentario
      *
@@ -107,7 +110,7 @@ class Modelo_Usuario {
     function setComentario($Comentario) {
         $this->Comentario = $Comentario;
     }
-    
+
     /**
      * getcodigoMod
      *
@@ -116,7 +119,7 @@ class Modelo_Usuario {
     public function getcodigoMod() {
         return $this->CodigoMod;
     }
-    
+
     /**
      * setcodigoMod
      *
@@ -216,6 +219,7 @@ class Modelo_Usuario {
 
         $sql = "UPDATE modelo_usuario SET favorito= 0 WHERE idUsu= $id and codigoMod={$this->codigoMod};";
 
+        // echo $sql;
         $db->query($sql);
 
 
@@ -233,7 +237,7 @@ class Modelo_Usuario {
         $sql = "INSERT INTO modelo_usuario (idUsu, codigoMod ,favorito) "
                 . "VALUES ({$this->idUsu}, {$this->CodigoMod},  1);";
 
-
+//echo $sql;
         $db->query($sql);
         $this->idUsu = $db->lastId();
     }

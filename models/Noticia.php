@@ -5,38 +5,42 @@
 require_once "libs/Database.php";
 
 class Noticia {
-    
+
     /**
      * idNoticia
      *
      * @var mixed
      */
-    private $idNoticia;    
+    private $idNoticia;
+
     /**
      * idUsu
      *
      * @var mixed
      */
-    private $idUsu;    
+    private $idUsu;
+
     /**
      * Titulo
      *
      * @var mixed
      */
-    private $Titulo;    
+    private $Titulo;
+
     /**
      * Desarrollo
      *
      * @var mixed
      */
-    private $Desarrollo;    
+    private $Desarrollo;
+
     /**
      * Fecha
      *
      * @var mixed
      */
     private $Fecha;
-    
+
     /**
      * __construct
      *
@@ -45,7 +49,7 @@ class Noticia {
     function __construct() {
         
     }
-    
+
     /**
      * getIdNoticia
      *
@@ -54,7 +58,7 @@ class Noticia {
     function getIdNoticia() {
         return $this->idNoticia;
     }
-    
+
     /**
      * getIdUsu
      *
@@ -63,7 +67,7 @@ class Noticia {
     function getIdUsu() {
         return $this->idUsu;
     }
-    
+
     /**
      * getTitulo
      *
@@ -72,7 +76,7 @@ class Noticia {
     function getTitulo() {
         return $this->Titulo;
     }
-    
+
     /**
      * getDesarrollo
      *
@@ -81,7 +85,7 @@ class Noticia {
     function getDesarrollo() {
         return $this->Desarrollo;
     }
-    
+
     /**
      * getFecha
      *
@@ -90,7 +94,7 @@ class Noticia {
     function getFecha() {
         return $this->Fecha;
     }
-    
+
     /**
      * setIdNoticia
      *
@@ -100,7 +104,7 @@ class Noticia {
     function setIdNoticia($idNoticia) {
         $this->idNoticia = $idNoticia;
     }
-    
+
     /**
      * setIdUsu
      *
@@ -110,7 +114,7 @@ class Noticia {
     function setIdUsu($idUsu) {
         $this->idUsu = $idUsu;
     }
-    
+
     /**
      * setTitulo
      *
@@ -120,7 +124,7 @@ class Noticia {
     function setTitulo($Titulo) {
         $this->Titulo = $Titulo;
     }
-    
+
     /**
      * setDesarrollo
      *
@@ -130,7 +134,7 @@ class Noticia {
     function setDesarrollo($Desarrollo) {
         $this->Desarrollo = $Desarrollo;
     }
-    
+
     /**
      * setFecha
      *

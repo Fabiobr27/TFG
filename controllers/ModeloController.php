@@ -12,23 +12,29 @@ class ModeloController extends BaseController {
 
     public function __construct() {
         parent::__construct();
+        
     }
-
-    /**
+  /**
      * Obtain the necessary data to show the Cars models
      *
      * @return void
      */
-    public function listar() {
-        $ses = Sesion::getInstance();
-        $idUsu = $ses->getUsuario();
+  public function listar() {
+         $sesion = Sesion::getInstance();
+        if ($sesion->checkActiveSession()) {
+      
+        $idUsu = $sesion->getUsuario();
         $tab = Marca::find($_GET["id"]);
 
 
         $dat = Modelo::findAll($_GET["id"]);
 
 
-        echo $this->twig->render("showModelos.php.twig", ['tab' => $tab, 'dat' => $dat, 'idUsu' => $idUsu]);
+        echo $this->twig->render("showModelos.php.twig", ['tab' => $tab, 'dat' => $dat, 'idUsu' => $idUsu]); } else {
+            header('Location: index.php');
+        }
     }
-
 }
+
+  
+ 

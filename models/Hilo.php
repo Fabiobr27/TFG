@@ -9,51 +9,56 @@ require_once "libs/Database.php";
  * @author Fabio Benitez Ramirez 
  */
 class Hilo {
-    
+
     /**
      * idHilo
      *
      * @var mixed
      */
-    private $idHilo;    
+    private $idHilo;
+
     /**
      * idUsu
      *
      * @var mixed
      */
-    private $idUsu;    
+    private $idUsu;
+
     /**
      * titulo
      *
      * @var mixed
      */
-    private $titulo;    
+    private $titulo;
+
     /**
      * texto
      *
      * @var mixed
-     */    
+     */
+    private $texto;
 
-    private $texto;    
     /**
      * fecha
      *
      * @var mixed
      */
-    private $fecha;    
+    private $fecha;
+
     /**
      * positivos
      *
      * @var mixed
      */
-    private $positivos;    
+    private $positivos;
+
     /**
      * negativos
      *
      * @var mixed
      */
     private $negativos;
-    
+
     /**
      * __construct
      *
@@ -62,7 +67,7 @@ class Hilo {
     function __construct() {
         
     }
-    
+
     /**
      * getIdHilo
      *
@@ -71,7 +76,7 @@ class Hilo {
     function getIdHilo() {
         return $this->idHilo;
     }
-    
+
     /**
      * getIdUsu
      *
@@ -80,7 +85,7 @@ class Hilo {
     function getIdUsu() {
         return $this->idUsu;
     }
-    
+
     /**
      * getTitulo
      *
@@ -89,7 +94,7 @@ class Hilo {
     function getTitulo() {
         return $this->titulo;
     }
-    
+
     /**
      * getTexto
      *
@@ -98,7 +103,7 @@ class Hilo {
     function getTexto() {
         return $this->texto;
     }
-    
+
     /**
      * getFecha
      *
@@ -107,7 +112,7 @@ class Hilo {
     function getFecha() {
         return $this->fecha;
     }
-    
+
     /**
      * getPositivos
      *
@@ -116,7 +121,7 @@ class Hilo {
     function getPositivos() {
         return $this->positivos;
     }
-    
+
     /**
      * getNegativos
      *
@@ -125,7 +130,7 @@ class Hilo {
     function getNegativos() {
         return $this->negativos;
     }
-    
+
     /**
      * setIdHilo
      *
@@ -135,7 +140,7 @@ class Hilo {
     function setIdHilo($idHilo) {
         $this->idHilo = $idHilo;
     }
-    
+
     /**
      * setIdUsu
      *
@@ -145,7 +150,7 @@ class Hilo {
     function setIdUsu($idUsu) {
         $this->idUsu = $idUsu;
     }
-    
+
     /**
      * setTitulo
      *
@@ -155,7 +160,7 @@ class Hilo {
     function setTitulo($titulo) {
         $this->titulo = $titulo;
     }
-    
+
     /**
      * setTexto
      *
@@ -165,7 +170,7 @@ class Hilo {
     function setTexto($texto) {
         $this->texto = $texto;
     }
-    
+
     /**
      * setFecha
      *
@@ -175,7 +180,7 @@ class Hilo {
     function setFecha($fecha) {
         $this->fecha = $fecha;
     }
-    
+
     /**
      * setPositivos
      *
@@ -185,7 +190,7 @@ class Hilo {
     function setPositivos($positivos) {
         $this->positivos = $positivos;
     }
-    
+
     /**
      * setNegativos
      *
@@ -207,8 +212,26 @@ class Hilo {
         $db = Database::getInstance();
         $db->query($sql);
         $listado = [];
-        while ($foro = $db->getObject("Hilo"))
-            array_push($listado, $foro);
+        while ($partido = $db->getObject("Hilo"))
+            array_push($listado, $partido);
+
+        return $listado;
+    }
+
+    /**
+     * get all the forum thread using a search engine
+     *
+     * @param  mixed $idHilo
+     * @return void
+     */
+    public static function filter($tit) {
+        $sql = "SELECT * FROM   usuario u, hilo h WHERE u.idUsu = h.idUsu and titulo like   '%" . $tit . "%'  ORDER BY h.fecha";
+
+        $db = Database::getInstance();
+        $db->query($sql);
+        $listado = [];
+        while ($filtro = $db->getObject("Hilo"))
+            array_push($listado, $filtro);
 
         return $listado;
     }
@@ -225,7 +248,12 @@ class Hilo {
             FROM usuario u, hilo h  WHERE u.idUsu = h.idUsu AND h.idHilo=$idHilo;");
         return $db->getObject();
     }
-
+/**
+     * get all the forum thread data where the id equals $idHilo
+     *
+     * @param  mixed $idHilo
+     * @return void
+     */
     public static function findHilos($idUsu) {
         $db = Database::getInstance();
         $db->query("SELECT * from usuario u , hilo h WHERE h.idUsu =u.idUsu and u.idUsu = $idUsu;");
@@ -244,7 +272,7 @@ class Hilo {
      */
     public function insertar() {
         $db = Database::getInstance();
-        $db->query("INSERT INTO Hilo (idUsu, titulo, texto, fecha, positivos, negativos) VALUES ({$this->idUsu},'{$this->titulo}', '{$this->texto}',
+        $db->query("INSERT INTO hilo (idUsu, titulo, texto, fecha, positivos, negativos) VALUES ({$this->idUsu},'{$this->titulo}', '{$this->texto}',
                         current_time(), 0, 0);");
     }
 

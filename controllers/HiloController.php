@@ -6,8 +6,6 @@ require_once "models/Hilo.php";
 require_once "models/Respuesta.php";
 require_once "libs/Sesion.php";
 
-//require_once "modelos/Respuesta.php";
-
 /**
  * Class HiloController
  * @author Fabio Benitez Ramirez
@@ -26,11 +24,15 @@ class HiloController extends BaseController {
      */
     public function listar() {
         $sesion = Sesion::getInstance();
-        $id = $sesion->getUsuario();
-        $idUsu = $id;
-        $dat = Hilo::findAll();
+        if ($sesion->checkActiveSession()) {
+            $id = $sesion->getUsuario();
+            $idUsu = $id;
+            $dat = Hilo::findAll();
 
-        echo $this->twig->render("showHilo.php.twig", ['dat' => $dat, 'idUsu' => $idUsu]);
+            echo $this->twig->render("showHilo.php.twig", ['dat' => $dat, 'idUsu' => $idUsu]);
+        } else {
+            header('Location: index.php');
+        }
     }
 
     /**
@@ -56,10 +58,15 @@ class HiloController extends BaseController {
      * @return void
      */
     public function listarCreados() {
-        $id = $_GET['id'];
-        $dat = Hilo::findHilos($id);
-        $usu = Usuario::find($id);
-        echo $this->twig->render("showHiloCreados.php.twig", ['dat' => $dat, 'idUsu' => $id, 'usu' => $usu]);
+        $sesion = Sesion::getInstance();
+        if ($sesion->checkActiveSession()) {
+            $id = $_GET['id'];
+            $dat = Hilo::findHilos($id);
+            $usu = Usuario::find($id);
+            echo $this->twig->render("showHiloCreados.php.twig", ['dat' => $dat, 'idUsu' => $id, 'usu' => $usu]);
+        } else {
+            header('Location: index.php');
+        }
     }
 
     /**
@@ -69,9 +76,10 @@ class HiloController extends BaseController {
      */
     public function add() {
         $sesion = Sesion::getInstance();
-        $id = $sesion->getUsuario();
-        $idUsu = $id;
-        if (isset($_GET["texto"])) {
+        if ($sesion->checkActiveSession()) {
+            $id = $sesion->getUsuario();
+            $idUsu = $id;
+
             $texto = $_GET["texto"];
             $titulo = $_GET["titulo"];
             $post = new Hilo();
@@ -83,6 +91,8 @@ class HiloController extends BaseController {
             $post->insertar();
 
             header("location: index.php?con=Hilo&ope=listar");
+        } else {
+            header("location: index.php");
         }
     }
 
@@ -93,25 +103,29 @@ class HiloController extends BaseController {
      */
     public function edit() {
         $sesion = Sesion::getInstance();
-        $id = $sesion->getUsuario();
-        $idUsu = $id;
-        $idHilo = $_GET["idHilo"];
+        if ($sesion->checkActiveSession()) {
+            $id = $sesion->getUsuario();
+            $idUsu = $id;
+            $idHilo = $_GET["idHilo"];
 
-        if (isset($_GET["texto"])) {
-            $texto = $_GET["texto"];
-            $titulo = $_GET["titulo"];
-            $hilo = new Hilo();
+            if (isset($_GET["texto"])) {
+                $texto = $_GET["texto"];
+                $titulo = $_GET["titulo"];
+                $hilo = new Hilo();
 
-            $hilo->setTexto($texto);
-            $hilo->setTitulo($titulo);
+                $hilo->setTexto($texto);
+                $hilo->setTitulo($titulo);
 
 
-            $hilo->guardar($idHilo);
+                $hilo->guardar($idHilo);
 
-            header("location: index.php?con=Hilo&ope=listar");
+                header("location: index.php?con=Hilo&ope=listar");
+            } else {
+                $Hilo = Hilo::find($idHilo);
+                echo $this->twig->render("editHilo.php.twig", (['hilo' => $Hilo, 'idUsu' => $idUsu]));
+            }
         } else {
-            $Hilo = Hilo::find($idHilo);
-            echo $this->twig->render("editHilo.php.twig", (['hilo' => $Hilo, 'idUsu' => $idUsu]));
+            header("location: index.php");
         }
     }
 
@@ -121,14 +135,22 @@ class HiloController extends BaseController {
      * @return void
      */
     public function ver() {
-        $idHilo = $_GET["id"];
+
         $sesion = Sesion::getInstance();
-        $id = $sesion->getUsuario();
-        $idUsu = $id;
-        $usuario = Usuario::find($idUsu);
-        $hilo = Hilo::find($idHilo);
-        $data = Respuesta::findAll($idHilo);
-        echo $this->twig->render("showInfo.php.twig", (['pos' => $hilo, 'data' => $data, 'usuario' => $usuario, 'idUsu' => $idUsu, 'idHilo' => $idHilo]));
+        if ($sesion->checkActiveSession()) {
+
+
+            $idHilo = $_GET["id"];
+
+            $id = $sesion->getUsuario();
+            $idUsu = $id;
+            $usuario = Usuario::find($idUsu);
+            $hilo = Hilo::find($idHilo);
+            $data = Respuesta::findAll($idHilo);
+            echo $this->twig->render("showInfo.php.twig", (['pos' => $hilo, 'data' => $data, 'usuario' => $usuario, 'idUsu' => $idUsu, 'idHilo' => $idHilo]));
+        } else {
+            header('Location: index.php');
+        }
     }
 
     /**

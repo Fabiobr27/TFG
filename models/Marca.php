@@ -134,29 +134,30 @@ class Marca {
      * @return void
      */
     public static function findAll() {
-        $db = Database::getInstance();
+        $db =  Database::getInstance();
         $db->query("SELECT * FROM marcas ;");
 
         $data = [];
         while ($obj = $db->getObject("Marca"))
             array_push($data, $obj);
 
-
+        
         return $data;
     }
 
-    /**
+  /**
      * get the Car Brand when your id equals $id
      *
      * @param integer $id
      * @return Marca
      */
     public static function find(int $id): Marca {
-        $db = Database::getInstance();
+       $db =  Database::getInstance();
         $db->query("SELECT * FROM marcas WHERE codigoMarca = $id ;");
 
-
+        
         return $db->getObject("Marca");
     }
 
+    
 }

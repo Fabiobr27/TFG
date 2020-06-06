@@ -40,14 +40,16 @@ class UsuarioController extends BaseController {
     public function mostrarPerfil() {
 
         $sesion = Sesion::getInstance();
-        $id = $sesion->getUsuario();
-        $tip = Usuario::find($id);
-        $dat = Usuario::find($id);
-        $mod = Usuario::MostrarMod();
-        //$men = Usuario::findMensajes($id);
-        // $hilo = Usuario::findHilos($id);
-        // $anuncio = Usuario::findAnuncios($id);
-        echo $this->twig->render("showPerfil.php.twig", ['dat' => $dat, 'tip' => $tip, 'mod' => $mod]);
+        if ($sesion->checkActiveSession()) {
+            $id = $sesion->getUsuario();
+            $tip = Usuario::find($id);
+            $dat = Usuario::find($id);
+            $mod = Usuario::MostrarMod();
+
+            echo $this->twig->render("showPerfil.php.twig", ['dat' => $dat, 'tip' => $tip, 'mod' => $mod]);
+        } else {
+            header('Location: index.php');
+        }
     }
 
     /**
@@ -57,13 +59,17 @@ class UsuarioController extends BaseController {
      */
     public function mostrarPerfilAjeno() {
         $sesion = Sesion::getInstance();
-        $idUsu = $sesion->getUsuario();
-        $id = $_GET['id'];
-        $tip = Usuario::find($idUsu);
-        $dat = Usuario::find($id);
-        $hilo = Usuario::findHilos($id);
-        $anuncio = Usuario::findAnuncios($id);
-        echo $this->twig->render("showPerfilAjeno.php.twig", ['dat' => $dat, 'men' => $men, 'hilo' => $hilo, 'anuncio' => $anuncio, 'tip' => $tip]);
+        if ($sesion->checkActiveSession()) {
+            $idUsu = $sesion->getUsuario();
+            $id = $_GET['id'];
+            $tip = Usuario::find($idUsu);
+            $dat = Usuario::find($id);
+            $hilo = Usuario::findHilos($id);
+            $anuncio = Usuario::findAnuncios($id);
+            echo $this->twig->render("showPerfilAjeno.php.twig", ['dat' => $dat, 'men' => $men, 'hilo' => $hilo, 'anuncio' => $anuncio, 'tip' => $tip]);
+        } else {
+            header('Location: index.php');
+        }
     }
 
     /**
@@ -72,8 +78,13 @@ class UsuarioController extends BaseController {
      * @return void
      */
     public function mostrarCuentas() {
-        $dat = Usuario::findAll();
-        echo $this->twig->render("showCuentas.php.twig", ['dat' => $dat]);
+        $sesion = Sesion::getInstance();
+        if ($sesion->checkActiveSession()) {
+            $dat = Usuario::findAll();
+            echo $this->twig->render("showCuentas.php.twig", ['dat' => $dat]);
+        } else {
+            header('Location: index.php');
+        }
     }
 
     /**
@@ -169,8 +180,7 @@ class UsuarioController extends BaseController {
 
         header("Location: index.php?con=Usuario&ope=mostrarPerfil&id=$idU");
     }
-
-    /**
+  /**
      * Dont make the user a moderator
      *
      * @return void
@@ -185,39 +195,41 @@ class UsuarioController extends BaseController {
 
         header("Location: index.php?con=Usuario&ope=mostrarPerfil&id=$idU");
     }
-
-    /**
+ /**
      * shows a form to edit the user data and once filled it updates it
      *
      * @return void
      */
     public function editar() {
-
+        // buscamos el tablero
         $sesion = Sesion::getInstance();
         $id = $sesion->getUsuario();
         $dat = Usuario::find($_GET["id"]);
 
         if (!isset($_GET["nom"])):
 
-
+            // mostramos el formulario de edición
+            //require_once "vistas/editBoard.php" ;
             echo $this->twig->render("editCuenta.php.twig", ['dat' => $dat]);
         else:
 
+            // actualizar la información en la 
+            // base de datos.
             $nom = $_GET["nom"];
             $fec = $_GET["fec"];
             $ape = $_GET["ape"];
             $ema = $_GET["ema"];
-
+            // actualizar los datos
 
             $dat->setNombre($nom);
             $dat->setFecha($fec);
             $dat->setApellidos($ape);
             $dat->setEmail($ema);
 
-
+            // refrescar el objeto en la base de datos
             $dat->save();
 
-
+            // redirigimos a la página principal
             header("Location: index.php?con=Usuario&ope=mostrarPerfil&id=$id");
 
         endif;

@@ -112,14 +112,6 @@ class loginController extends BaseController {
                     header("location:?con=login&ope=goMain&id=$id");
                 }
             }
-
-
-
-
-
-
-
-
         endif;
     }
 
@@ -135,8 +127,7 @@ class loginController extends BaseController {
 
         echo $this->twig->render("showMarcas.php.twig", (['dat' => $data, 'idUsu' => $idUsu]));
     }
-
-    /**
+ /**
      * We close the user session
      *
      * @return void
@@ -145,6 +136,98 @@ class loginController extends BaseController {
         $ses = Sesion::getInstance();
         $ses->close();
         $ses->redirect("index.php");
+    }
+
+    public function recuperarPass() {
+
+        if (!isset($_GET["email"])):
+
+            echo $this->twig->render("recuperarPass.php.twig");
+        else:
+
+
+
+            $nom = $_GET["nombre"];
+            $fec = $_GET["fnac"];
+            $ape = $_GET["apellidos"];
+            $pass = $_GET["pass"];
+            $ema = $_GET["email"];
+
+            $usu = new Usuario();
+            $usu->setNombre($nom);
+            $usu->setFecha($fec);
+            $usu->setApellidos($ape);
+            $usu->setPass($pass);
+            $usu->setEmail($ema);
+
+
+            $usu->insertar();
+
+            $sesion = Sesion::getInstance();
+            if ($sesion->login($ema, $pass)) {
+                $id = $sesion->getUsuario();
+                header("location:?con=login&ope=goMain&id=$id");
+            }
+
+
+
+        endif;
+    }
+     /**
+     * We check if the user knows their email and 
+      * their date of birth to send them a form to change their password
+     *
+     * @return void
+     */
+
+    public function recordarPass() {
+        $db = Database::getInstance();
+        if (!isset($_GET["email"])):
+
+            echo $this->twig->render("recordarPass.php.twig");
+        else:
+
+            $email = $_GET["email"];
+            $fecha = $_GET["fnac"];
+
+
+            $sql = "SELECT * FROM usuario WHERE email='$email' and 	fec_nac  = '$fecha';";
+
+            $db->query($sql);
+
+
+//We check that the email does not already exist
+            if ($user = $db->getObject("Usuario")) {
+                $this->error = true;
+                echo $this->twig->render("recordarPass.php.twig", ['error' => $this->error, 'user' => $user]);
+            } else {
+
+                header("location: index.php?con=login&ope=recordarPass");
+            }
+
+        endif;
+    }
+
+    /**
+     * Change the pass when the user forgets it
+     *
+     * @return void
+     */
+    public function cambiarPass() {
+        $sesion = Sesion::getInstance();
+
+        if (isset($_GET["pass"])) {
+            $Pass = $_GET["pass"];
+            $idUsu = $_GET["idUsu"];
+            $post = new Usuario;
+
+            $post->setPass($Pass);
+            $post->setIdUsu($idUsu);
+
+            $post->changePass();
+
+            header('Location: index.php');
+        }
     }
 
 }

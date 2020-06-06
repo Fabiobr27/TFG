@@ -9,50 +9,56 @@ require_once "models/Hilo.php";
  * @author Fabio Benitez Ramirez 
  */
 class Respuesta {
-    
+
     /**
      * idAnswer
      *
      * @var mixed
      */
-    private $idRes;    
+    private $idRes;
+
     /**
      * idthread
      *
      * @var mixed
      */
-    private $idHilo;    
+    private $idHilo;
+
     /**
      * idUser
      *
      * @var mixed
      */
-    private $idUsu;    
+    private $idUsu;
+
     /**
-     *text
+     * text
      *
      * @var mixed
      */
-    private $texto;    
+    private $texto;
+
     /**
-     *date
+     * date
      *
      * @var mixed
      */
-    private $fecha;    
+    private $fecha;
+
     /**
      * positives
      *
      * @var mixed
      */
-    private $positivos;    
+    private $positivos;
+
     /**
      * negatives
      *
      * @var mixed
      */
     private $negativos;
-    
+
     /**
      * __construct
      *
@@ -61,7 +67,7 @@ class Respuesta {
     function __construct() {
         
     }
-    
+
     /**
      * getIdRes
      *
@@ -70,7 +76,7 @@ class Respuesta {
     function getIdRes() {
         return $this->idRes;
     }
-    
+
     /**
      * getIdHilo
      *
@@ -79,7 +85,7 @@ class Respuesta {
     function getIdHilo() {
         return $this->idHilo;
     }
-    
+
     /**
      * getIdUsu
      *
@@ -88,7 +94,7 @@ class Respuesta {
     function getIdUsu() {
         return $this->idUsu;
     }
-    
+
     /**
      * getTexto
      *
@@ -97,7 +103,7 @@ class Respuesta {
     function getTexto() {
         return $this->texto;
     }
-    
+
     /**
      * getFecha
      *
@@ -106,7 +112,7 @@ class Respuesta {
     function getFecha() {
         return $this->fecha;
     }
-    
+
     /**
      * getPositivos
      *
@@ -115,7 +121,7 @@ class Respuesta {
     function getPositivos() {
         return $this->positivos;
     }
-    
+
     /**
      * getNegativos
      *
@@ -124,7 +130,7 @@ class Respuesta {
     function getNegativos() {
         return $this->negativos;
     }
-    
+
     /**
      * setIdRes
      *
@@ -134,7 +140,7 @@ class Respuesta {
     function setIdRes($idRes) {
         $this->idRes = $idRes;
     }
-    
+
     /**
      * setIdHilo
      *
@@ -144,7 +150,7 @@ class Respuesta {
     function setIdHilo($idHilo) {
         $this->idHilo = $idHilo;
     }
-    
+
     /**
      * setIdUsu
      *
@@ -154,7 +160,7 @@ class Respuesta {
     function setIdUsu($idUsu) {
         $this->idUsu = $idUsu;
     }
-    
+
     /**
      * setTexto
      *
@@ -164,7 +170,7 @@ class Respuesta {
     function setTexto($texto) {
         $this->texto = $texto;
     }
-    
+
     /**
      * setFecha
      *
@@ -174,7 +180,7 @@ class Respuesta {
     function setFecha($fecha) {
         $this->fecha = $fecha;
     }
-    
+
     /**
      * setPositivos
      *
@@ -184,7 +190,7 @@ class Respuesta {
     function setPositivos($positivos) {
         $this->positivos = $positivos;
     }
-    
+
     /**
      * setNegativos
      *

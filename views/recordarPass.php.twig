@@ -1,0 +1,114 @@
+
+{% extends "plantillaLogin.php.twig" %}
+
+{% block script %}
+  
+            
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% endblock %}
+
+{% block titulo %}
+  
+    <!--Fabio Benitez Ramirez-->
+    <h1 style="color: white"class="mt-4">Recordar Contraseña</h1>
+{% endblock %}
+
+{% block contenido %}
+
+
+
+
+    <div class="row">
+        <div class="col-sd-12 mx-auto">
+             <img class="logo"  width="500px "src="./Imagenes/logo.svg" alt="ForoCarros" />
+        </div>
+    </div>
+
+            <form method="get" action="index.php" >
+                <input type="hidden" name="ope" value="recordarPass"/>
+                <input type="hidden" name="con" value="login"/>
+
+                <div class="row form-group">
+                    <div class="col-md-4 mx-auto">
+                        <label class="col-form-label" for="email">Nombre de usuario:</label>
+                        <input class="form-control" type="email" name="email" 
+                               placeholder="email@foroCarros.com" required />
+                    </div>
+                </div>
+
+
+           
+
+
+
+                <div class="row form-group">
+                    <div class="col-md-4 mx-auto">
+                        <label class="col-form-label" for="fnac">Fecha de Nacimiento:</label>
+                        <input class="form-control" type="date" name="fnac" />
+                    </div>
+                </div>
+
+
+                <div class="row form-group">
+                    <div class="col-md-4 mx-auto">
+                        <button class="btn btn-primary w-100" type="submit">Registrar</button>
+                    </div>
+                </div>
+            </form>
+
+
+            <div class="row">
+                <div class="col-md-4 mx-auto text-center">
+                    <a href="index.php" class="btn btn-link">volver atrás</a>
+                </div>
+            </div>
+
+    
+  {% if error %}
+
+         
+ <button type="button"  class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Insertar una nueva Contraseña</button>      
+        {% endif %}
+        </div>
+
+           
+  
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Insertar una nueva Contraseña</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div> 
+                    <form method="GET" class="form">
+                        <div class="modal-body">
+
+                            <input type="hidden" name="con" value="login"/>
+                            <input type="hidden" name="ope" value="cambiarPass"/>
+
+                            <input type="hidden" name="idUsu" value="{{ user.idUsu }}"/>
+                            <label style="color: black" for="pass">Introduce tu nueva contraseña </label>
+                            <textarea class="form-control" maxlength="300" rows="5" name="pass" required></textarea><br/>
+                            
+                           
+                           
+                  
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Cambiar</button>
+                </div>  </form>
+            </div>
+        </div>
+    </div>
+                            
+                            {% endblock %}

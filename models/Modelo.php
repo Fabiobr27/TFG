@@ -1,10 +1,11 @@
 <?php
 
-
+// Modelo TABLERO
+// Modelo Vista Controlador
+// curso 2019/20
 
 require_once "libs/Database.php";
 require_once "models/Marca.php";
-
 /**
  * Class Modelo
  * @autor Fabio Benitez Ramirez
@@ -148,17 +149,19 @@ class Modelo {
         return $data;
     }
 
-    /**
+   /**
      * get the data of the model when the id of the model = $codigoModelo
      * 
      * @param $codigoModelo
      * @return Modelo
      */
-    public static function find($codigoMod): Modelo {
+      public static function find($codigoMod): Modelo {
         $db = Database::getInstance();
         $db->query("SELECT NombreMod, CodigoMod, CodigoMarca, imagen,favorito FROM modelo   WHERE codigoMod = $codigoMod order by 1;");
 
         return $db->getObject("Modelo");
     }
+
+    
 
 }

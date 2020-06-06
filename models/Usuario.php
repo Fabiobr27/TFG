@@ -5,56 +5,63 @@
  * @author Fabio Benitez Ramirez
  */
 class Usuario {
-    
+
     /**
      * idUsu
      *
      * @var mixed
      */
-    private $idUsu;    
+    private $idUsu;
+
     /**
      * email
      *
      * @var mixed
      */
-    private $email;    
+    private $email;
+
     /**
      * pass
      *
      * @var mixed
      */
-    private $pass;    
+    private $pass;
+
     /**
      * nombre
      *
      * @var mixed
      */
-    private $nombre;    
+    private $nombre;
+
     /**
      * apellidos
      *
      * @var mixed
      */
-    private $apellidos;    
+    private $apellidos;
+
     /**
      * fec_nac
      *
      * @var mixed
      */
-    private $fec_nac;    
+    private $fec_nac;
+
     /**
      * foto
      *
      * @var mixed
      */
-    private $foto;    
+    private $foto;
+
     /**
      * SerMod
      *
      * @var mixed
      */
     private $SerMod;
-    
+
     /**
      * __construct
      *
@@ -63,7 +70,7 @@ class Usuario {
     public function __construct() {
         
     }
-    
+
     /**
      * getIdUsu
      *
@@ -72,7 +79,7 @@ class Usuario {
     public function getIdUsu() {
         return $this->idUsu;
     }
-    
+
     /**
      * setIdUsu
      *
@@ -84,7 +91,7 @@ class Usuario {
 
         return $this;
     }
-    
+
     /**
      * getPass
      *
@@ -93,7 +100,7 @@ class Usuario {
     public function getPass() {
         return $this->pass;
     }
-    
+
     /**
      * setPass
      *
@@ -103,7 +110,7 @@ class Usuario {
     public function setPass($pass) {
         return $this->pass = $pass;
     }
-    
+
     /**
      * getNombre
      *
@@ -112,7 +119,7 @@ class Usuario {
     public function getNombre() {
         return $this->nombre;
     }
-    
+
     /**
      * setNombre
      *
@@ -122,7 +129,7 @@ class Usuario {
     public function setNombre($nom) {
         return $this->nombre = $nom;
     }
-    
+
     /**
      * getApellidos
      *
@@ -131,7 +138,7 @@ class Usuario {
     public function getApellidos() {
         return $this->apellidos;
     }
-    
+
     /**
      * setApellidos
      *
@@ -141,7 +148,7 @@ class Usuario {
     public function setApellidos($ape) {
         return $this->apellidos = $ape;
     }
-    
+
     /**
      * getEmail
      *
@@ -150,7 +157,7 @@ class Usuario {
     public function getEmail() {
         return $this->email;
     }
-    
+
     /**
      * setEmail
      *
@@ -162,7 +169,7 @@ class Usuario {
 
         return $this;
     }
-    
+
     /**
      * setFecha
      *
@@ -174,7 +181,7 @@ class Usuario {
 
         return $this;
     }
-    
+
     /**
      * getFecha
      *
@@ -183,7 +190,7 @@ class Usuario {
     public function getFecha() {
         return $this->fec_nac;
     }
-    
+
     /**
      * setFoto
      *
@@ -195,7 +202,7 @@ class Usuario {
 
         return $this;
     }
-    
+
     /**
      * getFoto
      *
@@ -204,7 +211,7 @@ class Usuario {
     public function getFoto() {
         return $this->foto;
     }
-    
+
     /**
      * getSerMod
      *
@@ -213,7 +220,7 @@ class Usuario {
     function getSerMod() {
         return $this->SerMod;
     }
-    
+
     /**
      * setSerMod
      *
@@ -223,7 +230,7 @@ class Usuario {
     function setSerMod($SerMod) {
         $this->SerMod = $SerMod;
     }
-    
+
     /**
      * __toString
      *
@@ -268,6 +275,18 @@ class Usuario {
     }
 
     /**
+     * Get data from users thah they want to change the password
+     *
+     * @return void
+     */
+    public static function findPass($email, $fecn): Usuario {
+        $db = Database::getInstance();
+        $db->query("SELECT * FROM usuario WHERE email='$email' and fec_nac ='$fecn' ;");
+
+        return $db->getObject("Usuario");
+    }
+
+    /**
      * Get data from users who want to be moderators
      *
      * @return void
@@ -306,8 +325,7 @@ class Usuario {
         $tipo = "Admin";
         $db->query("Update usuario set Tipo ='$tipo' where idUsu={$this->idUsu};");
     }
-
-    /**
+   /**
      * make the user a moderator
      *
      * @return void
@@ -317,8 +335,7 @@ class Usuario {
         $tipo = "Moderador";
         $db->query("Update usuario set Tipo ='$tipo' , SerMod = 0 where idUsu={$this->idUsu};");
     }
-
-    /**
+ /**
      * Dont make the user a moderator
      *
      * @return void
@@ -328,19 +345,18 @@ class Usuario {
         $SerMod = "0";
         $db->query("Update usuario set SerMod ='$SerMod' where idUsu={$this->idUsu};");
     }
-
-    /**
+      /**
      * Submit a request to be a moderator
      *
      * @return void
      */
+
     public function SerMod() {
         $db = Database::getInstance();
         $SerMod = "1";
         $db->query("Update usuario set SerMod ='$SerMod'  where idUsu={$this->idUsu};");
     }
-
-    /**
+/**
      * Insert a new user in the database
      *
      * @return void
@@ -364,6 +380,21 @@ class Usuario {
         $db = Database::getInstance();
         $consulta = "update usuario set nombre='" . $this->nombre . "',email='" . $this->email . "',fec_nac='" . $this->fec_nac . "',apellidos='" . $this->apellidos . "' where idUsu=" . $this->idUsu;
 
+        //echo $consulta;
+        $db->query($consulta);
+    }
+
+    /**
+     * Updtate the pass of user 
+     *
+     * @return void
+     */
+    public function changePass() {
+
+        $db = Database::getInstance();
+        $consulta = "update usuario set pass=md5('{$this->pass}')  where idUsu=" . $this->idUsu;
+
+        //echo $consulta;
         $db->query($consulta);
     }
 

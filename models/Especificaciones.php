@@ -163,8 +163,7 @@ class Especificaciones {
      * @return array
      */
     public static function findAll($codigoMod): array {
-        $db = Database::getInstance();
-        ;
+         $db =  Database::getInstance();;
         $db->query("SELECT * FROM especificaciones WHERE codigoMod = $codigoMod;");
 
         $data = [];
@@ -174,15 +173,14 @@ class Especificaciones {
 
         return $data;
     }
-
-    /**
+     /**
      * get the specifications where the id of them are equals $codigoEspe
      *
      * @param  $codigoEspe
      * @return Especificaciones
      */
     public static function find($codigoEspe): Especificaciones {
-        $db = Database::getInstance();
+        $db =  Database::getInstance();
         $db->query("SELECT CodEspe, CodigoMod, Caballos, Año, Combustible FROM especificaciones  WHERE codEspe= $codigoEspe;");
 
         return $db->getObject("Especificaciones");
@@ -194,22 +192,23 @@ class Especificaciones {
      * @return void
      */
     public function eliminar() {
-        $db = Database::getInstance();
+        $db =  Database::getInstance();
         $db->query("DELETE FROM especificaciones WHERE codEspe={$this->CodEspe} ;");
+    
+       // echo"DELETE FROM especificaciones WHERE codEspe= {$this->CodEspe} ;";
     }
 
-    /**
+      /**
      * insert into the database the news specifications
      *
      * @return void
      */
-    public function save() {
-        $db = Database::getInstance();
-        $consulta = "insert into especificaciones (caballos,combustible , codigoMod, año) values ({$this->Caballos},'{$this->Combustible}',{$this->CodigoMod},{$this->Año});";
+      public function save(){
+              $db =  Database::getInstance();
+            $consulta = "insert into especificaciones (caballos,combustible , codigoMod, año) values ({$this->Caballos},'{$this->Combustible}',{$this->CodigoMod},{$this->Año});";
 
-        echo $consulta;
-        $db->query($consulta);
-        $this->CodEspe = $db->lastId();
-    }
-
+            //echo $consulta;
+           $db->query($consulta);
+         $this->CodEspe = $db->lastId();
+        }
 }
