@@ -127,7 +127,8 @@ class loginController extends BaseController {
 
         echo $this->twig->render("showMarcas.php.twig", (['dat' => $data, 'idUsu' => $idUsu]));
     }
- /**
+
+    /**
      * We close the user session
      *
      * @return void
@@ -173,13 +174,13 @@ class loginController extends BaseController {
 
         endif;
     }
-     /**
+
+    /**
      * We check if the user knows their email and 
-      * their date of birth to send them a form to change their password
+     * their date of birth to send them a form to change their password
      *
      * @return void
      */
-
     public function recordarPass() {
         $db = Database::getInstance();
         if (!isset($_GET["email"])):
@@ -214,6 +215,7 @@ class loginController extends BaseController {
      * @return void
      */
     public function cambiarPass() {
+
         $sesion = Sesion::getInstance();
 
         if (isset($_GET["pass"])) {
@@ -227,6 +229,50 @@ class loginController extends BaseController {
             $post->changePass();
 
             header('Location: index.php');
+        }
+    }
+
+    /**
+     * Change the pass when the user want
+     *
+     * @return void
+     */
+    public function cambiarContraseña() {
+        $sesion = Sesion::getInstance();
+        $db = Database::getInstance();
+        if (isset($_GET["pass1"])) {
+
+            $passAntigua = $_GET["pass1"];
+            $passNueva = $_GET["pass2"];
+            $idUsu = $_GET["idUsu"];
+
+            $sql = "SELECT * FROM usuario WHERE pass=md5('$passAntigua') and idUsu  = '$idUsu';";
+
+
+            $db->query($sql);
+
+
+//We check that the email does not already exist
+            if ($user = $db->getObject("Usuario")) {
+
+                $post = new Usuario;
+
+                $post->setPass($passNueva);
+                $post->setIdUsu($idUsu);
+
+                $post->changePass();
+
+
+                header("location:index.php?con=Usuario&ope=mostrarPerfil");
+            } else {
+
+
+                $tip = Usuario::find($idUsu);
+                $dat = Usuario::find($idUsu);
+                $mod = Usuario::MostrarMod();
+                $this->error = true;
+                echo $this->twig->render("showPerfil.php.twig", ['dat' => $dat, 'tip' => $tip, 'mod' => $mod, 'error' => $this->error]);
+            }
         }
     }
 

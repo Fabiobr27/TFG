@@ -394,7 +394,7 @@ class Usuario {
         $db = Database::getInstance();
         $consulta = "update usuario set pass=md5('{$this->pass}')  where idUsu=" . $this->idUsu;
 
-        //echo $consulta;
+      
         $db->query($consulta);
     }
 

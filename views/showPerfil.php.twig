@@ -20,7 +20,7 @@
         $(document).ready(function () {
             $("#formButton").click(function () {
                 $("table").toggle();
-                 $("h3").toggle();
+                $("h3").toggle();
                 $("#formButton").toggle();
             });
         });
@@ -32,7 +32,15 @@
 
 
     <div class="container">
+         {% if error %}
+
+                    <p class="alert alert-danger">La contraseña no coincide con la original. 
+                        <br> <a class="nav-link" href="index.php?con=login&ope=recordarPass" style="color: black">¿Has olvidado la contraseña?</a></p>
+                   
+
+                    {% endif %}
         <div class="row">
+               
             <div class="col-sm">
 
 
@@ -45,7 +53,7 @@
                         <h6 style="color: black" class="card-title">Email: {{dat.Email}}</h6>
                         <h6 style="color: black" class="card-title">Tipo Usuario: {{dat.Tipo}}</h6>
 
-                        
+
                         {% if tip.Tipo == 'normal' %}  
                             <a class="btn "  href="index.php?con=Usuario&ope=SolicitarMod&id={{dat.idUsu}}">Solicitar ser Moderador</a>
 
@@ -63,9 +71,14 @@
                         {% endif %}
 
                     </div>      <a class="btn btn-primary"  href="index.php?con=Usuario&ope=editar&id={{dat.idUsu}}">Editar Cuenta</a> 
+                    <br>
 
-                </div>	<!-- end-card-body -->  
+                    <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Cambiar Contraseña</button>   
+
+                </div>	<!-- end-card-body --> 
+               
             </div>	<!-- end-card -->
+          
             <div class="col-sm">
 
                 <div id="moderador">
@@ -102,7 +115,8 @@
 
                         {% endfor %}
 
-                    </div>
+                    </div> 
+
                 {% endif%}
 
 
@@ -112,4 +126,44 @@
             </div>	<!-- end-col -->
 
         </div>
-    {% endblock %}
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cambiar Contraseña</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div> 
+                    <form method="GET" class="form">
+                        <div class="modal-body">
+
+                            <input type="hidden" name="con" value="login"/>
+                            <input type="hidden" name="ope" value="cambiarContraseña"/>
+
+                            <input type="hidden" name="idUsu" value="{{ dat.IdUsu }}"/>
+                            <label style="color: black" for="pass1">Introduce tu antigua contraseña </label>
+                            <input class="form-control" type="text" name="pass1" 
+                                   placeholder="Contraseña Antigua" required />
+                            <br>
+
+                            <label style="color: black" for="pass2">Introduce tu nueva contraseña </label>
+                            <input class="form-control" type="text" name="pass2" 
+                                   placeholder="Contraseña nueva" required />
+
+                        </div>
+
+
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Cambiar</button>
+                        </div> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

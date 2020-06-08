@@ -7,6 +7,7 @@ require_once "models/Modelo.php";
 require_once "models/Marca.php";
 require_once "models/Usuario.php";
 require_once "libs/Sesion.php";
+require_once "libs/Routing.php";
 
 class ModeloController extends BaseController {
 
