@@ -35,4 +35,52 @@ class MarcaController extends BaseController {
         }
     }
    
+    
+    
+    /**
+     * create api of the Car Brands
+     *
+     * @return void
+     */
+    public function api() {
+        $sesion = Sesion::getInstance();
+        if ($sesion->checkActiveSession()) {
+
+            $dat = Marca::findAll();
+
+
+
+
+            foreach ($dat as $item):
+                $marca = new Marca();
+                $show = json_decode(json_encode($dat), true);
+
+
+
+
+                $marca = $item->NombreMarca ?? "";
+                $aniofundacion = $item->AñoFundacuion ?? "";
+                $logo = $item->logo ?? "";
+                $codigoMarca = $item->CodigoMarca ?? "";
+
+
+
+                $sql = "INSERT INTO marcas (NombreMarca,  AñoFundacion , logo , codigoMarca)";
+                $sql .= "VALUES ($marca,  $aniofundacion  $logo ,$codigoMarca ) ;";
+
+                echo $sql;
+
+                echo "Insertando $marca.... <br/>";
+            
+   
+    
+        
+
+
+
+            endforeach;
+        } else {
+            header('Location: index.php');
+        }
+    }
 }

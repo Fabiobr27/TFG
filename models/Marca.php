@@ -15,25 +15,25 @@ class Marca {
      *
      * @var mixed
      */
-    private $NombreMarca;    
+    prublic $NombreMarca;    
     /**
      * CodigoMarca
      *
      * @var mixed
      */
-    private $CodigoMarca;    
+    public $CodigoMarca;    
     /**
      * anioFundacion
      *
      * @var mixed
      */
-    private $anioFundacion;    
+    public $anioFundacion;    
     /**
      * logo
      *
      * @var mixed
      */
-    private $logo;
+     public $logo;
     
     /**
      * __construct
